@@ -8,7 +8,9 @@ module.exports = {
       colors: {
         AzulClaro: '#c4d2e7',
         Azul: '#688db9',
+        AzulCeleste: '#4f6c9d',
         GrisOscuro: '#333333'
+
       },
     },
   },

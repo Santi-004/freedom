@@ -1,9 +1,10 @@
 import Button from "./components/Button";
 import './index.css';
+import Producto from "./pages/Producto";
 
 function App() {
   return(
-    <p>Hola Mundo.</p>
+    <Producto></Producto>
   );
   
 }
