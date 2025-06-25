@@ -12,6 +12,9 @@ module.exports = {
         GrisOscuro: '#333333'
 
       },
+      screens: {
+        'DropDownMenu': '950px'
+      },
     },
   },
   plugins: [],

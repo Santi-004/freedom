@@ -1,15 +1,14 @@
 import {FaPhone, FaEnvelope, FaFacebookSquare} from 'react-icons/fa';
 import { AiFillMessage, AiFillTikTok  } from "react-icons/ai";
 import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
-import LogoFreedomBlanco from '../assets/img/Logo Freedom Blanco.png'
-import { FaXTwitter } from 'react-icons/fa6';
+import LogoFreedomBlanco from '../assets/img/Logo Freedom Blanco.png';
 
 function Footer(){
     return(
         <footer className='bg-GrisOscuro flex flex-wrap w-full mx-auto justify-center gap-4 p-4'>
             <section className='flex flex-col flex-grow m-5 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
-                    <h3 className='text-white text-xl p-3 '>Navegación</h3>
+                    <h3 className='text-white text-2xl p-3 '>Navegación</h3>
                     <p className='text-white p-1' >Inicio</p>
                     <p className='text-white p-1'>Catalogo</p>
                     <p className='text-white p-1'>Favoritos</p>
@@ -38,7 +37,7 @@ function Footer(){
 
             <section className='flex flex-col flex-grow m-5 text-center max-w-[350px] max-h-[300px]'>
                 <div className='flex flex-col items-center justify-center text-center'>
-                    <h3 className='text-white text-xl p-3'>Freedom</h3>
+                    <h3 className='text-white text-2xl p-3'>Freedom</h3>
                     <img className='w-36 h-36' src={LogoFreedomBlanco} alt="" />
                 </div>
             </section>
@@ -46,7 +45,7 @@ function Footer(){
 
             <section className='flex flex-col flex-grow m-5 pl-14 pr-14 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
-                    <h3 className='text-white text-xl p-3 '>Redes</h3>
+                    <h3 className='text-white text-2xl p-3 '>Redes</h3>
                     <div className='flex items-center gap-2'>
                         <FaSquareInstagram className='h-6 w-auto text-white'/>
                         <p className='text-white p-1 text-left'>Seguinos en Instagram</p>
