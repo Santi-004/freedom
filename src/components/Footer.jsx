@@ -1,4 +1,4 @@
-import {FaPhone, FaEnvelope, FaFacebookSquare} from 'react-icons/fa';
+import {FaPhoneAlt, FaEnvelope, FaFacebookSquare} from 'react-icons/fa';
 import { AiFillMessage, AiFillTikTok  } from "react-icons/ai";
 import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 import LogoFreedomBlanco from '../assets/img/Logo Freedom Blanco.png';
@@ -9,11 +9,11 @@ function Footer(){
             <section className='flex flex-col flex-grow m-5 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Navegación</h3>
-                    <p className='text-white p-1' >Inicio</p>
-                    <p className='text-white p-1'>Catalogo</p>
-                    <p className='text-white p-1'>Favoritos</p>
-                    <p className='text-white p-1'>Carrito</p>
-                    <p className='text-white p-1'>Perfil</p>
+                    <div className='p-1'><p className='linkanimado text-white'>Inicio</p></div>
+                    <div className='p-1'><p className='linkanimado text-white'>Catalogo</p></div>
+                    <div className='p-1'><p className='linkanimado text-white'>Favoritos</p></div>
+                    <div className='p-1'><p className='linkanimado text-white'>Carrito</p></div>
+                    <div className='p-1'><p className='linkanimado text-white'>Perfil</p></div>
                 </div>
             </section>
 
@@ -21,16 +21,20 @@ function Footer(){
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Contacto</h3>
                     <div className='flex items-center gap-2'>
-                        <FaPhone className='h-6 w-auto text-white transform scale-x-[-1]'/>
-                        <p className='text-white p-1 text-left text-lg'>Teléfono: 2994278970</p>
+                        <FaPhoneAlt className='h-6 w-auto text-white transform animacion-escala animacion-rotacion cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
+                            alert("¡Teléfono copiado al portapapeles!");}}/>
+                        <div className='p-1'><p className='text-white text-left text-lg linkanimado cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
+                            alert("Teléfono copiado al portapapeles!");}}>Teléfono: 2994278970</p></div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <FaEnvelope className='h-6 w-auto text-white'/>
-                        <p className='text-white p-1 text-left text-lg'>freedomtiendaofficial@gmail.com</p>
+                        <FaEnvelope className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer' onClick={() => {navigator.clipboard.writeText("freedomtiendaofficial@gmail.com"); 
+                            alert("¡Gmail copiado al portapapeles!");}}/>
+                        <div className='p-1'><p className='text-white text-left text-lg linkanimado cursor-pointer' onClick={() => {navigator.clipboard.writeText("freedomtiendaofficial@gmail.com"); 
+                            alert("¡Gmail copiado al portapapeles!");}}>freedomtiendaofficial@gmail.com</p></div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <AiFillMessage className='h-6 w-auto text-white transform scale-x-[-1]'/>
-                        <p className='text-white p-1 text-left text-lg'>Mensaje privado a Instagram</p>
+                        <a  href="https://www.instagram.com/direct/t/17848310676219591"><AiFillMessage className='h-6 w-auto text-white transform scale-x-[-1] animacion-escala animacion-rotacion cursor-pointer'/></a>
+                        <div className='p-1'><a className='linkanimado' href="https://www.instagram.com/direct/t/17848310676219591"><p className='text-white text-left text-lg cursor-pointer'>Mensaje privado a Instagram</p></a></div>
                     </div>
                 </div>
             </section>
@@ -47,20 +51,20 @@ function Footer(){
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Redes</h3>
                     <div className='flex items-center gap-2'>
-                        <FaSquareInstagram className='h-6 w-auto text-white'/>
-                        <p className='text-white p-1 text-left'>Seguinos en Instagram</p>
+                        <a href="https://www.instagram.com/freedomofficialpage_/"><FaSquareInstagram className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/></a>
+                        <div className='p-1'><a className='linkanimado'  href="https://www.instagram.com/freedomofficialpage_/"><p className='text-white text-left cursor-pointer'>Seguinos en Instagram</p></a></div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <FaFacebookSquare className='h-6 w-auto text-white'/>
-                        <p className='text-white p-1 text-left'>Seguinos en Facebook</p>
+                        <FaFacebookSquare className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
+                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en Facebook</p></div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <FaSquareXTwitter className='h-6 w-auto text-white'/>
-                        <p className='text-white p-1 text-left'>Seguinos en X</p>
+                        <FaSquareXTwitter className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
+                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en X</p></div>
                     </div>
                     <div className='flex items-center gap-2'>
-                        <AiFillTikTok className='h-6 w-auto text-white'/>
-                        <p className='text-white p-1 text-left'>Seguinos en TikTok</p>
+                        <AiFillTikTok className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
+                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en TikTok</p></div>
                     </div>
                 </div>
             </section>

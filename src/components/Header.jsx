@@ -9,15 +9,15 @@ function Header(){
     return(
         <header className="bg-GrisOscuro h-[100px] flex justify-between items-center">
             <div>
-                <img src={LogoFreedom} className="h-[100px] w-[200px] p-3"/>
+                <img src={LogoFreedom} alt="Logo Freedom" className="h-[100px] w-[200px] p-3"/>
             </div>
 
             <div>
                 <nav className="flex p-5 hidden DropDownMenu:flex">
-                    <p className='text-white text-2xl p-3 '>INICIO</p>
-                    <p className='text-white text-2xl p-3 '>CATALOGO</p>
-                    <p className='text-white text-2xl p-3 '>NOSOTROS</p>
-                    <p className='text-white text-2xl p-3 '>CONTACTOS</p>
+                    <div className="p-3"><p className='linkanimado text-white text-2xl'>INICIO</p></div>
+                    <div className="p-3"><p className='linkanimado text-white text-2xl'>CATALOGO</p></div>
+                    <div className="p-3"><p className='linkanimado text-white text-2xl'>NOSOTROS</p></div>
+                    <div className="p-3"><p className='linkanimado text-white text-2xl'>CONTACTOS</p></div>
 
                     <FaShoppingCart className="h-6 w-auto text-white m-4" />
                     <FaStar className="h-6 w-auto text-white m-4" />
@@ -30,13 +30,13 @@ function Header(){
                     </button>
 
                     {mostrar && (
-                        <div className={`absolute xl:hidden top-24 left-0 w-full bg-GrisOscuro flex flex-col item-center gap-6 `}>
+                        <div className={"absolute xl:hidden top-24 left-0 w-full bg-GrisOscuro flex flex-col item-center gap-6 dropdownmenuanimacion"}>
                             <div className="">
-                                <p className='text-white text-xl text-center p-3 '>INICIO</p>
-                                <p className='text-white text-xl text-center p-3 '>CATALOGO</p>
-                                <p className='text-white text-xl text-center p-3 '>FAVORITOS</p>
-                                <p className='text-white text-xl text-center p-3 '>CARRITO</p>
-                                <p className='text-white text-xl text-center p-3 '>PERFIL</p>
+                                <div className="p-3"><p className='text-white text-xl text-center animacion-escala'>INICIO</p></div>
+                                <div className="p-3"><p className='text-white text-xl text-center animacion-escala'>CATALOGO</p></div>
+                                <div className="p-3"><p className='text-white text-xl text-center animacion-escala'>FAVORITOS</p></div>
+                                <div className="p-3"><p className='text-white text-xl text-center animacion-escala'>CARRITO</p></div>
+                                <div className="p-3"><p className='text-white text-xl text-center animacion-escala'>PERFIL</p></div>
                             </div>
                         </div>
                     )}

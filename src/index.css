@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+/* Link animado para los textos */
+.linkanimado{
+    color: white;
+    text-decoration: none;
+    position: relative; 
+    display: inline-block; /* permite que link actue como un bloque */
+    padding-bottom: 1px;
+}
+
+/* Animación del texto antes de que el mouse se posicione sobre el */
+.linkanimado::before{
+    content: "";
+    position: absolute; /* Se posiciona por encima del .linkanimado */
+    bottom: 0; /* Posiciona el subrayado debajo del texto */
+    left: 50%; /* Hace que el subrayado empiece en el centro */
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease, left 0.3s ease; /* Animación width va a tardar 0.3s en estar al 100% del ancho y left en estar a 0 px */
+}
+
+/* Cambio de ancho y left cuando el mouse esta sobre el link */
+.linkanimado:hover::before{
+    width: 100%;
+    left: 0;
+}
+
+/* Animación de fade-down  */
+@keyframes fade-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100%{
+    transform: translate(0);
+  }
+}
+
+/* Animcaión para el dropdownmenu */
+.dropdownmenuanimacion{
+    animation: fade-down 0.3s ease forwards;
+}
+
+/* Animación de rotación */
+@keyframes rotacion{
+    0%{transform:rotateY(0)}
+    100%{transform:rotateY(360deg)}
+}
+
+.animacion-escala:hover{
+scale: 1.2;
+}
+
+.animacion-rotacion:not(:hover){
+    animation: rotacion 0.8s;
+}
