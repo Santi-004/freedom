@@ -50,7 +50,7 @@ body{
   }
 }
 
-/* Animcaión para el dropdownmenu */
+/* Animación para el dropdownmenu */
 .dropdownmenuanimacion{
     animation: fade-down 0.3s ease forwards;
 }
@@ -61,10 +61,12 @@ body{
     100%{transform:rotateY(360deg)}
 }
 
-.animacion-escala:hover{
-scale: 1.2;
-}
-
+/* Animacion de rotacion */
 .animacion-rotacion:not(:hover){
     animation: rotacion 0.8s;
+}
+
+/* Animación de escala */
+.animacion-escala:hover{
+scale: 1.2;
 }
