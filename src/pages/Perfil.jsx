@@ -7,20 +7,51 @@ function Perfil(){
         <body class="bg-AzulClaro">
             <div >
                 <Header></Header>
-                <div className="flex">
-                    <div className="w-[400px] p-4 bg-Azul">
-                        <div className="w-full p-2"><Button texto="INFORMACIÓN DE LA CUENTA" color="AzulClaro"></Button></div>
-                        <div className="w-full p-2"><Button texto="METODOS DE PAGO" color="AzulClaro"></Button></div>
-                        <div className="w-full p-2"><Button texto="PEDIDOS" color="AzulClaro"></Button></div>
-                        <div className="w-full p-2"><Button texto="NOTIFICACIONES" color="AzulClaro"></Button></div>
-                        <div className="w-full p-2"><Button texto="AYUDA" color="AzulClaro"></Button></div>
+
+                {/* Div con toda la page del perfil */}
+                <div className="flex ">
+
+                    {/* Div que se muestra en pantallas de 1024 pixeles de ancho o más. */}
+                    <div className="hidden lg:flex flex w-full">
+
+                        {/* Div que contiene el menu de información*/}
+                        <div className="w-[400px] h-auto p-4 bg-Azul flex flex-col items-center justify-center">
+                            <div className="w-full p-2"><Button texto="INFORMACIÓN DE LA CUENTA" color="AzulClaro"></Button></div>
+                            <div className="w-full p-2"><Button texto="METODOS DE PAGO" color="AzulClaro"></Button></div>
+                            <div className="w-full p-2"><Button texto="PEDIDOS" color="AzulClaro"></Button></div>
+                            <div className="w-full p-2"><Button texto="NOTIFICACIONES" color="AzulClaro"></Button></div>
+                            <div className="w-full p-2"><Button texto="AYUDA" color="AzulClaro"></Button></div>
+                        </div>
+                        
+                        {/* Div que contiene la información principal de la cuenta.*/}
+                        <div className="flex flex-col items-center justify-center mx-auto w-auto m-10">
+                            <div className="rounded-full bg-Azul w-[200px] h-[200px] "></div>
+                            <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full min-w-[400px]"><p>Nombre:</p></div>
+                            <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>E-Mail:</p></div>
+                            <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>Teléfono:</p></div>
+                        </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center mx-auto w-auto m-10">
-                        <div className="rounded-full bg-Azul w-[200px] h-[200px] "></div>
-                        <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full min-w-[400px]"><p>Nombre:</p></div>
-                        <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>E-Mail:</p></div>
-                        <div className="mt-5 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>Teléfono:</p></div>
-                    </div>
+
+                    {/* Div que se muestra en pantallas de 1023 pixeles de ancho o menos. */}
+                    <div className="w-full lg:hidden">
+                        
+                        {/* Div que contiene la información principal de la cuenta.*/}
+                        <div className="flex flex-col items-center justify-center mx-auto w-auto mt-0 p-4">
+                            <div className="rounded-full bg-Azul w-[100px] h-[100px] "></div>
+                            <div className="mt-2 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>Nombre:</p></div>
+                            <div className="mt-2 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>E-Mail:</p></div>
+                            <div className="mt-2 bg-Azul font-bold py-2 px-4 rounded-full text-center w-full"><p>Teléfono:</p></div>
+                        </div>
+
+                        {/* Div que contiene el menu de información*/}
+                        <div className="p-4 bg-Azul">
+                            <div className="w-full "><Button texto="INFORMACIÓN DE LA CUENTA" color="AzulClaro"></Button></div>
+                            <div className="w-full mt-2"><Button texto="METODOS DE PAGO" color="AzulClaro"></Button></div>
+                            <div className="w-full mt-2"><Button texto="PEDIDOS" color="AzulClaro"></Button></div>
+                            <div className="w-full mt-2"><Button texto="NOTIFICACIONES" color="AzulClaro"></Button></div>
+                            <div className="w-full mt-2"><Button texto="AYUDA" color="AzulClaro"></Button></div>
+                        </div>
+                    </div>    
                 </div>
                 <Footer></Footer>
             </div>    
