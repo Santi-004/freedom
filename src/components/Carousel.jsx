@@ -31,61 +31,125 @@ const Carousel = () => {
   };
 
   return (
-    <div className=" max-w-3xl flex m-10">
-      {/* Panel de navegación */}
-      <div className="grid grid-flow-col grid-rows-4 mr-10"> 
-        {slides.map((slide, index) => (
-          <button
-            key={slide.id}
-            onClick={() => goToSlide(index)}
-            className={`w-16 h-16 rounded-md overflow-hidden m-2 hover:scale-105 transition ${
-              slide.image ? '' : `${slide.color} text-white flex items-center justify-center text-xs`
-            }`}
+    <div>
+      <div className=" max-w-3xl flex m-10 hidden DropDownMenu:flex">
+        {/* Panel de navegación */}
+        <div className="grid grid-flow-col grid-rows-4 mr-10"> 
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(index)}
+              className={`w-16 h-16 rounded-md overflow-hidden m-2 hover:scale-105 transition ${
+                slide.image ? '' : `${slide.color} text-white flex items-center justify-center text-xs`
+              }`}
+            >
+              {slide.image ? (
+                <img
+                  src={slide.image}
+                  alt={`Thumb ${slide.id}`}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                slide.text
+              )}
+            </button>
+
+          ))}
+        </div>
+
+        <div className='max-w-xl flex'>
+          {/* Swiper principal con flechas y paginación */}
+        <Swiper
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          modules={[Navigation, Pagination]}
+          navigation
+          pagination={{ clickable: true }}
+          spaceBetween={20}
+          slidesPerView={1}
+          className="rounded-xl"
+          loop={true}
+        >
+          {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+          {slide.image ? (
+            <img
+              src={slide.image}
+              alt={`Slide ${slide.id}`}
+              className="w-full h-full object-cover rounded-xl"
+            />
+          ) : (
+            <div className={`h-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
+                {slide.text}
+            </div>
+          )}
+        </SwiperSlide>
+
+            
+          ))}
+        </Swiper>
+        </div>
+      </div>
+
+
+
+
+
+
+
+      
+      <div className='flex DropDownMenu:hidden flex flex-col'>
+        <div className='w-full flex p-2'>
+          {/* Swiper principal con flechas y paginación */}
+          <Swiper
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            modules={[Navigation, Pagination]}
+            navigation
+            pagination={{ clickable: true }}
+            spaceBetween={20}
+            slidesPerView={1}
+            className="rounded-xl"
+            loop={true}
           >
+            {slides.map((slide) => (
+            <SwiperSlide key={slide.id}>
             {slide.image ? (
               <img
                 src={slide.image}
-                alt={`Thumb ${slide.id}`}
-                className="w-full h-full object-cover"
+                alt={`Slide ${slide.id}`}
+                className="w-full h-full object-cover rounded-xl"
               />
-            ) : (
-              slide.text
-            )}
-          </button>
+              ) : (
+              <div className={`h-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
+                  {slide.text}
+              </div>
+              )}
+            </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
-        ))}
-      </div>
-
-      <div className='max-w-xl flex'>
-        {/* Swiper principal con flechas y paginación */}
-      <Swiper
-        onSwiper={(swiper) => (swiperRef.current = swiper)}
-        modules={[Navigation, Pagination]}
-        navigation
-        pagination={{ clickable: true }}
-        spaceBetween={20}
-        slidesPerView={1}
-        className="rounded-xl"
-        loop={true}
-      >
-        {slides.map((slide) => (
-        <SwiperSlide key={slide.id}>
-        {slide.image ? (
-          <img
-            src={slide.image}
-            alt={`Slide ${slide.id}`}
-            className="w-full h-full object-cover rounded-xl"
-          />
-        ) : (
-          <div className={`h-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
-              {slide.text}
-          </div>
-        )}
-      </SwiperSlide>
-
-          
-        ))}
-      </Swiper>
+        {/* Panel de navegación */}
+        <div className="flex flex-wrap items-center justify-center m-5"> 
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(index)}
+              className={`w-16 h-16 rounded-md overflow-hidden m-2 hover:scale-105 transition ${
+                slide.image ? '' : `${slide.color} text-white flex items-center justify-center text-xs`
+              }`}
+            >
+              {slide.image ? (
+                <img
+                  src={slide.image}
+                  alt={`Thumb ${slide.id}`}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                slide.text
+              )}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
