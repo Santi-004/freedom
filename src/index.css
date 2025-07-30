@@ -68,7 +68,7 @@ body{
 
 /* Animación de escala */
 .animacion-escala:hover{
-    scale: 1.2;
+    transform: scale(1.2);
 }
 
 .swiper-pagination-bullet {

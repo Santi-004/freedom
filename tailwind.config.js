@@ -13,7 +13,8 @@ module.exports = {
 
       },
       screens: {
-        'DropDownMenu': '950px'
+        'DropDownMenu': '950px',
+        'mid': { 'min': '951px', 'max': '1250px' },
       },
     },
   },

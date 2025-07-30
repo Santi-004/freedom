@@ -24,9 +24,9 @@ function Header(){
                     <div className="p-3"><Link to="/catalogo" className="linkanimado text-white text-2xl cursor-pointer">CATALOGO</Link></div>
                     <div className="p-3"><Link to="/" className="linkanimado text-white text-2xl cursor-pointer">NOSOTROS</Link></div>
                     <div className="p-3"><Link to="/" className="linkanimado text-white text-2xl cursor-pointer">CONTACTOS</Link></div>
-                    <div><Link to="/carrito" ><FaShoppingCart className="h-6 w-auto text-white m-4 animacion-escala" /></Link></div>
-                    <div><Link to="/favoritos" ><FaStar className="h-6 w-auto text-white m-4 animacion-escala" /></Link></div>
-                    <div><Link to="/perfil" ><FaUserCircle className="h-6 w-auto text-white m-4 animacion-escala" /></Link></div>
+                    <div><Link to="/carrito" ><FaShoppingCart className="h-6 w-auto text-white m-4 animacion-escala transition-transform duration-300 ease-in-out" /></Link></div>
+                    <div><Link to="/favoritos" ><FaStar className="h-6 w-auto text-white m-4 animacion-escala transition-transform duration-300 ease-in-out" /></Link></div>
+                    <div><Link to="/perfil" ><FaUserCircle className="h-6 w-auto text-white m-4 animacion-escala transition-transform duration-300 ease-in-out" /></Link></div>
                 </nav>
                 
                 {/* Boton de DropDownMenu para las pantallas pequeñas */}
@@ -39,11 +39,11 @@ function Header(){
                         // Nav para pantallas pequeñas
                         <div className={"absolute xl:hidden top-24 left-0 w-full z-50 bg-GrisOscuro flex flex-col items-center gap-6 dropdownmenuanimacion"}>
                             <div className="">
-                                <div className="p-3"><Link to="/"><p className='text-white text-xl text-center animacion-escala'>INICIO</p></Link></div>
-                                <div className="p-3"><Link to="/catalogo"><p className='text-white text-xl text-center animacion-escala'>CATALOGO</p></Link></div>
-                                <div className="p-3"><Link to="/carrito"><p className='text-white text-xl text-center animacion-escala'>CARRITO</p></Link></div>
-                                <div className="p-3"><Link to="/favoritos"><p className='text-white text-xl text-center animacion-escala'>FAVORITOS</p></Link></div>
-                                <div className="p-3"><Link to="/perfil"><p className='text-white text-xl text-center animacion-escala'>PERFIL</p></Link></div>
+                                <div className="p-3"><Link to="/"><p className='text-white text-xl text-center animacion-escala transition-transform duration-300 ease-in-out'>INICIO</p></Link></div>
+                                <div className="p-3"><Link to="/catalogo"><p className='text-white text-xl text-center animacion-escala transition-transform duration-300 ease-in-out'>CATALOGO</p></Link></div>
+                                <div className="p-3"><Link to="/carrito"><p className='text-white text-xl text-center animacion-escala transition-transform duration-300 ease-in-out'>CARRITO</p></Link></div>
+                                <div className="p-3"><Link to="/favoritos"><p className='text-white text-xl text-center animacion-escala transition-transform duration-300 ease-in-out'>FAVORITOS</p></Link></div>
+                                <div className="p-3"><Link to="/perfil"><p className='text-white text-xl text-center animacion-escala transition-transform duration-300 ease-in-out'>PERFIL</p></Link></div>
                             </div>
                         </div>
                     )}
