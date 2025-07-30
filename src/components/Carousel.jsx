@@ -9,7 +9,9 @@ import 'swiper/css/pagination';
 import { useRef } from 'react';
 
 const Carousel = () => {
-  const swiperRef = useRef(null);
+  const swiperRefmid = useRef(null);
+  const swiperRefDesktop = useRef(null);
+  const swiperRefMobile = useRef(null);
 
   // Array con los slides del carousel.
   const slides = [
@@ -25,16 +27,17 @@ const Carousel = () => {
 
   // Función para cambiar los slides desde el menu.
   const goToSlide = (index) => {
-    if (swiperRef.current) {
-      swiperRef.current?.slideToLoop(index);
-    }
+      swiperRefmid.current?.slideToLoop(index);
+      swiperRefDesktop.current?.slideToLoop(index);
+      swiperRefMobile.current?.slideToLoop(index);
   };
 
   return (
     <div>
-      <div className=" max-w-3xl flex m-10 hidden DropDownMenu:flex">
+      {/* Carousel para pantallas grandes */}
+      <div className="max-w-[800px] w-full m-10 flex hidden DropDownMenu:flex mid:hidden">
         {/* Panel de navegación */}
-        <div className="grid grid-flow-col grid-rows-4 mr-10"> 
+        <div className="h-[60vh] w-[10%] mr-1 pr-4 flex flex-col items-center justify-center"> 
           {slides.map((slide, index) => (
             <button
               key={slide.id}
@@ -57,16 +60,16 @@ const Carousel = () => {
           ))}
         </div>
 
-        <div className='max-w-xl flex'>
+        <div className='w-[90%] flex'>
           {/* Swiper principal con flechas y paginación */}
         <Swiper
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onSwiper={(swiper) => (swiperRefDesktop.current = swiper)}
           modules={[Navigation, Pagination]}
           navigation
           pagination={{ clickable: true }}
           spaceBetween={20}
           slidesPerView={1}
-          className="rounded-xl"
+          className="rounded-xl "
           loop={true}
         >
           {slides.map((slide) => (
@@ -78,7 +81,7 @@ const Carousel = () => {
               className="w-full h-full object-cover rounded-xl"
             />
           ) : (
-            <div className={`h-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
+            <div className={`h-full w-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
                 {slide.text}
             </div>
           )}
@@ -90,21 +93,69 @@ const Carousel = () => {
         </div>
       </div>
 
+      {/* Carousel para pantallas medias */}
+      <div className="max-w-[600px] w-full m-10 flex flex-col hidden mid:flex DropDownMenu:hidden">
 
+        <div className='w-[100%] flex'>
+          {/* Swiper principal con flechas y paginación */}
+        <Swiper
+          onSwiper={(swiper) => (swiperRefmid.current = swiper)}
+          modules={[Navigation, Pagination]}
+          navigation
+          pagination={{ clickable: true }}
+          spaceBetween={20}
+          slidesPerView={1}
+          className="rounded-xl "
+          loop={true}
+        >
+          {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+          {slide.image ? (
+            <img
+              src={slide.image}
+              alt={`Slide ${slide.id}`}
+              className="w-full h-full object-cover rounded-xl"
+            />
+          ) : (
+            <div className={`h-full w-full flex items-center justify-center text-2xl text-white ${slide.color}`}>
+                {slide.text}
+            </div>
+          )}
+        </SwiperSlide>
+          ))}
+        </Swiper>
+        </div>
 
+        {/* Panel de navegación */}
+        <div className="flex flex-wrap items-center justify-center m-5 ml-28 mr-28"> 
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(index)}
+              className={`w-16 h-16 rounded-md overflow-hidden m-2 hover:scale-105 transition ${
+                slide.image ? '' : `${slide.color} text-white flex items-center justify-center text-xs`
+              }`}
+            >
+              {slide.image ? (
+                <img
+                  src={slide.image}
+                  alt={`Thumb ${slide.id}`}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                slide.text
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
 
-
-
-
-      
-      <div className='flex DropDownMenu:hidden flex flex-col'>
-        <div className='w-full flex p-2'>
+      {/* Carousel para pantallas pequeñas */}
+      <div className='flex DropDownMenu:hidden flex-col'>
+        <div className='w-screen max-w-full p-5 flex'>
           {/* Swiper principal con flechas y paginación */}
           <Swiper
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            modules={[Navigation, Pagination]}
-            navigation
-            pagination={{ clickable: true }}
+            onSwiper={(swiper) => (swiperRefMobile.current = swiper)} 
             spaceBetween={20}
             slidesPerView={1}
             className="rounded-xl"
@@ -129,7 +180,7 @@ const Carousel = () => {
         </div>
 
         {/* Panel de navegación */}
-        <div className="flex flex-wrap items-center justify-center m-5"> 
+        <div className="flex flex-wrap items-center justify-center m-5 mt-0"> 
           {slides.map((slide, index) => (
             <button
               key={slide.id}
