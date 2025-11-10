@@ -8,6 +8,8 @@ import Catalogo from "./pages/Catalogo";
 import Favoritos from "./pages/Favoritos";
 import Index from "./pages/index";
 import Perfil from "./pages/Perfil";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function App() {
   return (
