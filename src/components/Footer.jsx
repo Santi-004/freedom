@@ -10,7 +10,7 @@ function Footer(){
         <footer className='bg-GrisOscuro flex flex-wrap w-full mx-auto justify-center gap-4 p-4'>
             
             {/* Sección de navegación */}
-            <section className='flex flex-col flex-grow m-5 text-center max-w-[350px] max-h-[300px]'>
+            <section className='flex flex-col flex-grow m-2 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Navegación</h3>
                     <div className='p-1'><Link to="/" className="linkanimado text-white cursor-pointer">Inicio</Link></div>
@@ -22,36 +22,47 @@ function Footer(){
             </section>
 
             {/* Sección de contacto */}
-            <section className='flex flex-col flex-grow m-5 pl-5 pr-5 text-center max-w-[350px] max-h-[300px]'>
+            <section className='flex flex-col flex-grow m-2 pl-5 pr-5 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Contacto</h3>
                     
                     {/* Div de teléfono */}
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 mt-2'>
                         <FaPhoneAlt className='h-6 w-auto text-white transform animacion-escala animacion-rotacion cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
                             alert("¡Teléfono copiado al portapapeles!");}}/>
-                        <div className='p-1'><p className='text-white text-left text-lg linkanimado cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
-                            alert("Teléfono copiado al portapapeles!");}}>Teléfono: 2994278970</p></div>
+                        <div className='p-1'>
+                            
+                            <a className='linkanimado'>
+                            <p className='mb-0 text-white text-left text-lg linkanimado cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
+                            alert("Teléfono copiado al portapapeles!");}}>Teléfono: 2994278970</p>
+                        </a>
+                        </div>
                     </div>
 
                     {/* Div de correo */}
-                    <div className='flex items-center gap-2'>
-                        <FaEnvelope className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer' onClick={() => {navigator.clipboard.writeText("freedomtiendaofficial@gmail.com"); 
-                            alert("¡Gmail copiado al portapapeles!");}}/>
-                        <div className='p-1'><p className='text-white text-left text-lg linkanimado cursor-pointer' onClick={() => {navigator.clipboard.writeText("freedomtiendaofficial@gmail.com"); 
-                            alert("¡Gmail copiado al portapapeles!");}}>freedomtiendaofficial@gmail.com</p></div>
+                    <div className='flex items-center gap-2 mt-2'>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=freedomtiendaofficial@gmail.com" target="_blank" rel="noopener noreferrer">
+                          <FaEnvelope className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
+                        </a>
+                        <div className='p-1'>
+                          <a className='linkanimado' href="https://mail.google.com/mail/?view=cm&fs=1&to=freedomtiendaofficial@gmail.com" target="_blank" rel="noopener noreferrer">
+                            <p className='mb-0 text-white text-left text-lg cursor-pointer'>freedomtiendaofficial@gmail.com</p>
+                          </a>
+                        </div>
                     </div>
 
                     {/* Div de mensaje */}
-                    <div className='flex items-center gap-2'>
-                        <a  href="https://www.instagram.com/direct/t/17848310676219591"><AiFillMessage className='h-6 w-auto text-white transform scale-x-[-1] animacion-escala animacion-rotacion cursor-pointer'/></a>
-                        <div className='p-1'><a className='linkanimado' href="https://www.instagram.com/direct/t/17848310676219591"><p className='text-white text-left text-lg cursor-pointer'>Mensaje privado a Instagram</p></a></div>
+                    <div className='flex items-center gap-2 mt-2'>
+                        <a  href="https://www.instagram.com/direct/t/17848310676219591"><AiFillMessage className='h-6 w-auto text-white transform scale-x-[-1] animacion-escala animacion-rotacion cursor-pointer mr-1'/></a>
+                        <a className='linkanimado' href="https://www.instagram.com/direct/t/17848310676219591" target="_blank" rel="noopener noreferrer">
+                            <p className='mb-0 text-white text-left text-lg cursor-pointer'>Mensaje privado a Instagram</p>
+                        </a>
                     </div>
                 </div>
             </section>
                             
             {/* Sección de logo Freedom */}
-            <section className='flex flex-col flex-grow m-5 text-center max-w-[350px] max-h-[300px]'>
+            <section className='flex flex-col flex-grow m-2 text-center max-w-[350px] max-h-[300px]'>
                 <div className='flex flex-col items-center justify-center text-center'>
                     <h3 className='text-white text-2xl p-3'>Freedom</h3>
                     <img className='w-36 h-36' src={LogoFreedomBlanco} alt="Logo Freedom" />
@@ -59,32 +70,32 @@ function Footer(){
             </section>
 
             {/* Sección de redes */}
-            <section className='flex flex-col flex-grow m-5 pl-14 pr-14 text-center max-w-[350px] max-h-[300px]'>
+            <section className='flex flex-col flex-grow m-2 pl-14 pr-14 text-center max-w-[350px] max-h-[300px]'>
                 <div className='text-center'>
                     <h3 className='text-white text-2xl p-3 '>Redes</h3>
 
                     {/* Div de Instagram */}
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 mt-2'>
                         <a href="https://www.instagram.com/freedomofficialpage_/"><FaSquareInstagram className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/></a>
-                        <div className='p-1'><a className='linkanimado'  href="https://www.instagram.com/freedomofficialpage_/"><p className='text-white text-left cursor-pointer'>Seguinos en Instagram</p></a></div>
+                        <div className='p-1'><a className='linkanimado'  href="https://www.instagram.com/freedomofficialpage_/"><p className='mb-0 text-white text-left text-lg cursor-pointer'>Seguinos en Instagram</p></a></div>
                     </div>
 
                     {/* Div de Facebook */}
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 mt-2'>
                         <FaFacebookSquare className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
-                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en Facebook</p></div>
+                        <div className='p-1'><p className='mb-0 text-white text-left text-lg linkanimado cursor-pointer'>Seguinos en Facebook</p></div>
                     </div>
 
                     {/* Div de Twitter */}
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 mt-2'>
                         <FaSquareXTwitter className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
-                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en X</p></div>
+                        <div className='p-1'><p className='mb-0 linkanimado text-white text-left cursor-pointer'>Seguinos en X</p></div>
                     </div>
 
                     {/* Div TikTok */}
-                    <div className='flex items-center gap-2'>
+                    <div className='flex items-center gap-2 mt-2'>
                         <AiFillTikTok className='h-6 w-auto text-white animacion-escala animacion-rotacion cursor-pointer'/>
-                        <div className='p-1'><p className='linkanimado text-white text-left cursor-pointer'>Seguinos en TikTok</p></div>
+                        <div className='p-1'><p className='mb-0 linkanimado text-white text-left cursor-pointer'>Seguinos en TikTok</p></div>
                     </div>
                 </div>
             </section>

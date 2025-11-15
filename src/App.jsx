@@ -1,4 +1,3 @@
-import Button from "./components/Button";
 import { BrowserRouter } from "react-router-dom";
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
