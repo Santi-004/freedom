@@ -4,14 +4,11 @@ import RemeraCatalogo from "../components/RemeraCatalogo";
 
 function Catalogo(){
     return(
-        <body class="bg-AzulClaro">
-            <div >
-                <Header></Header>
-                <RemeraCatalogo></RemeraCatalogo>
-                <Footer></Footer>
-            </div>    
-        </body>
-        
+        <div className="bg-AzulClaro">
+            <Header></Header>
+            <RemeraCatalogo></RemeraCatalogo>
+            <Footer></Footer>
+        </div>    
     )
 }
 

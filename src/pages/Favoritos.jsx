@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useContext } from "react";
-import { AppContext } from "./Store";
+import { AppContext } from "../context/AppContext";
 
 function Favoritos() {
   const { favorites, removeFromFavorites } = useContext(AppContext);

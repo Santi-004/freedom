@@ -2,7 +2,7 @@ import { useContext } from "react";
 import remera_referencia from "../assets/img/remera_referencia.jpg";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa6";
-import { AppContext } from "../pages/Store";
+import { AppContext } from "../context/AppContext";
 
 function RemeraCatalogo() {
   const { addToCart, addToFavorites } = useContext(AppContext);

@@ -15,6 +15,25 @@ function Index() {
     AOS.refresh();
   }, []);
 
+  // Scroll al elemento correspondiente al hashtag
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash ? window.location.hash.replace('#', '') : '';
+      if (hash) {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 0);
+      }
+    };
+    
+    scrollToHash();
+    window.addEventListener('hashchange', scrollToHash);
+    return () => window.removeEventListener('hashchange', scrollToHash);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-AzulClaro">
       {/* Header */}
@@ -29,7 +48,7 @@ function Index() {
 
       {/* ======= Sección: Sobre Nosotros ======= */}
 <section
-  id="nosotros"  // 👈 este es el id
+  id="nosotros"  // este es el id
   className="sobrenosotros min-h-screen flex flex-col items-center justify-center bg-transparent text-gray-900"
   data-aos="fade-up"
 >
@@ -41,7 +60,7 @@ function Index() {
 
 {/* ======= Sección: Contactos ======= */}
 <section
-  id="contacto"  // 👈 este es el id
+  id="contacto"  // este es el id
   className="contacto min-h-screen flex flex-col items-center justify-center bg-transparent text-gray-900"
   data-aos="fade-up"
   data-aos-delay="400"
