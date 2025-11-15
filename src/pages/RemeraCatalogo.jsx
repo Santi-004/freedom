@@ -1,34 +1,47 @@
+import { useContext } from "react";
+import { AppContext } from "../pages/Store";
+
 import remera_referencia from "../assets/img/remera_referencia.jpg";
-import { FaShoppingCart, FaStar} from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaRegStar } from "react-icons/fa6";
 
 function RemeraCatalogo() {
-    return(
-        <div className="flex flex-col p-2 w-60 h-60 border-4 rounded-lg border-black bg-Azul items-center">
-  <div className="flex w-full">
-    <button>
-        <FaShoppingCart className="h-6 w-auto text-white m-2 animacion-escala transition-transform duration-300 ease-in-out" />
-        <span className="text-sm"></span>
-    </button>
+  const { addToCart, addToFavorites } = useContext(AppContext);
 
-    <button className="ml-auto">
-        <FaRegStar className="h-6 w-auto text-white m-2 animacion-escala transition-transform duration-300 ease-in-out"/>
+  const producto = {
+    id: 1,
+    nombre: "Remera Azul",
+    descripcion: "Remera de algodón premium",
+    precio: 19999,
+    imagen: remera_referencia,
+  };
 
-        <span className="text-sm"></span>
-    </button>
-  </div>
+  return (
+    <div className="flex flex-col p-2 w-60 h-60 border-4 rounded-lg border-black bg-Azul items-center">
+      
+      <div className="flex w-full">
+        {/* Botón agregar al carrito */}
+        <button onClick={() => addToCart(producto)}>
+          <FaShoppingCart className="h-6 w-auto text-white m-2 transition-transform duration-300" />
+        </button>
 
-  <div className="p-2 w-full h-full">
-    <img className="w-full h-full" src={remera_referencia} alt="" />
-  </div>
+        {/* Botón agregar a favoritos */}
+        <button className="ml-auto" onClick={() => addToFavorites(producto)}>
+          <FaRegStar className="h-6 w-auto text-white m-2 transition-transform duration-300" />
+        </button>
+      </div>
 
-  <div>
-    <p>Precio</p>
-    <p>NOMBRE</p>
-  </div>
-</div>
+      <div className="p-2 w-full h-full">
+        <img className="w-full h-full object-cover" src={producto.imagen} alt={producto.nombre} />
+      </div>
 
-    );
+      <div>
+        <p>${producto.precio}</p>
+        <p>{producto.nombre}</p>
+      </div>
+
+    </div>
+  );
 }
 
 export default RemeraCatalogo;

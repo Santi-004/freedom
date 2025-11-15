@@ -86,8 +86,24 @@ export const AppProvider = ({ children }) => {
       setShowLogin(true); //abre el popup de login
       return;
     }
-    setCart((prev) => [...prev, item]); //agrega el item al carrito
+    setCart((prev) => {
+      // Si viene con talle, eliminar cualquier entrada previa del mismo producto sin talle
+      let next = item.talle ? prev.filter((p) => !(p.id === item.id && !p.talle)) : [...prev];
+
+      // Evitar duplicado exacto por id+talle
+      if (item.talle) {
+        const existsSameTalle = next.some((p) => p.id === item.id && p.talle === item.talle);
+        if (existsSameTalle) return next;
+        return [...next, item];
+      }
+
+      // Caso sin talle: evitar múltiples entradas sin talle del mismo producto
+      const existsNoTalle = next.some((p) => p.id === item.id && !p.talle);
+      if (existsNoTalle) return next;
+      return [...next, item];
+    });
   };
+
   const removeFromCart = (id) =>
     setCart((prev) => prev.filter((item) => item.id !== id)); //remueve un item del carrito
 

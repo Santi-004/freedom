@@ -41,7 +41,7 @@ function Index() {
 
       {/* Contenido principal */}
       <main className="flex-grow flex flex-col items-center justify-center w-full">
-        <div className="w-full p-4">
+        <div className="w-full">
           <CarouselHome />
         </div>
       </main>

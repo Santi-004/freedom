@@ -40,7 +40,7 @@ const AppRouter = () => {
       {/* Rutas públicas  */}
       <Route path="/" element={<Index />} />
       <Route path="/catalogo" element={<Catalogo />} />
-      <Route path="/producto" element={<Producto />} />
+      <Route path="/producto/:id" element={<Producto />} />
 
       {/* Rutas privadas */}
       <Route

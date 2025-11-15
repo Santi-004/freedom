@@ -1,34 +1,54 @@
 import { useState } from "react";
 import { useProductos } from "../hooks/useProductos";
 
+{/* Componente que deja agrega un producto */}
 export default function AltaProducto() {
   const { agregarProducto } = useProductos();
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
+  const [imagenCard, setImagenCard] = useState("");
+  const [slide1, setSlide1] = useState("");
+  const [slide2, setSlide2] = useState("");
+  const [slide3, setSlide3] = useState("");
+  const [slide4, setSlide4] = useState("");
+  const [slide5, setSlide5] = useState("");
   const [formProducto, setFormProducto] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //Alertas
+    //Alerta
     if (!nombre || !descripcion || !precio || !stock) {
       alert("Todos los campos son obligatorios");
       return;
     }
 
+    {/* Acá agregamos el producto */}
     await agregarProducto({
       nombre,
       descripcion,
       precio: Number(precio),
       stock: Number(stock),
+      imagenCard: imagenCard || null,
+      slide1: slide1 || null,
+      slide2: slide2 || null,
+      slide3: slide3 || null,
+      slide4: slide4 || null,
+      slide5: slide5 || null,
     });
 
     setNombre("");
     setDescripcion("");
     setPrecio("");
     setStock("");
+    setImagenCard("");
+    setSlide1("");
+    setSlide2("");
+    setSlide3("");
+    setSlide4("");
+    setSlide5("");
     setFormProducto(false); // cerrar popup
   };
 
@@ -95,6 +115,46 @@ export default function AltaProducto() {
                   onChange={(e) => setStock(e.target.value)}
                   className="border-4 border-Azul rounded-lg p-2 w-full bg-white"
                 />
+              </div>
+
+              {/* Imagen card catálogo */}
+              <div className="mb-3">
+                <label className="block font-medium">Imagen de tarjeta (URL):</label>
+                <input
+                  type="url"
+                  value={imagenCard}
+                  onChange={(e) => setImagenCard(e.target.value)}
+                  placeholder="https://..."
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white"
+                />
+              </div>
+
+              {/* Slides de producto */}
+              <div className="mb-2 font-semibold">Imágenes del producto (Slides 1 a 5, URLs):</div>
+              <div className="mb-2">
+                <input type="url" placeholder="Slide 1"
+                  value={slide1} onChange={(e) => setSlide1(e.target.value)}
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white" />
+              </div>
+              <div className="mb-2">
+                <input type="url" placeholder="Slide 2"
+                  value={slide2} onChange={(e) => setSlide2(e.target.value)}
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white" />
+              </div>
+              <div className="mb-2">
+                <input type="url" placeholder="Slide 3"
+                  value={slide3} onChange={(e) => setSlide3(e.target.value)}
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white" />
+              </div>
+              <div className="mb-2">
+                <input type="url" placeholder="Slide 4"
+                  value={slide4} onChange={(e) => setSlide4(e.target.value)}
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white" />
+              </div>
+              <div className="mb-4">
+                <input type="url" placeholder="Slide 5"
+                  value={slide5} onChange={(e) => setSlide5(e.target.value)}
+                  className="border-4 border-Azul rounded-lg p-2 w-full bg-white" />
               </div>
               <div className="flex items-center justify-center">
                 <button
