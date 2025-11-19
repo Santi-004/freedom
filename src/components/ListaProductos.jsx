@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useProductos } from "../hooks/useProductos";
 
-const ListaProductos = () => {
+const ListaProductos = ({ searchTerm = "", sort = "none" }) => {
   const { productos, loading, eliminarProducto, editarProducto } = useProductos();
   const [productoEditando, setProductoEditando] = useState(null);
   const [nombre, setNombre] = useState("");
@@ -17,6 +17,37 @@ const ListaProductos = () => {
   const [slide5, setSlide5] = useState("");
 
   if (loading) return <p>Cargando productos...</p>;
+
+  // Filtro por búsqueda (nombre o descripción)
+  const term = searchTerm.toString().trim().toLowerCase();
+  let listaFiltrada = productos.filter((p) => {
+    if (!term) return true;
+    const nombre = (p.nombre ?? "").toString().toLowerCase();
+    const descripcion = (p.descripcion ?? "").toString().toLowerCase();
+    return nombre.includes(term) || descripcion.includes(term);
+  });
+
+  // Orden
+  const compareText = (a = "", b = "") => a.localeCompare(b, "es", { sensitivity: "base" });
+
+  listaFiltrada = [...listaFiltrada].sort((a, b) => {
+    switch (sort) {
+      case "name-asc":
+        return compareText(a.nombre, b.nombre);
+      case "name-desc":
+        return compareText(b.nombre, a.nombre);
+      case "price-asc":
+        return (a.precio ?? 0) - (b.precio ?? 0);
+      case "price-desc":
+        return (b.precio ?? 0) - (a.precio ?? 0);
+      case "stock-asc":
+        return (a.stock ?? 0) - (b.stock ?? 0);
+      case "stock-desc":
+        return (b.stock ?? 0) - (a.stock ?? 0);
+      default:
+        return 0;
+    }
+  });
 
   const handleEditClick = (prod) => {
     setProductoEditando(prod.id);
@@ -57,12 +88,12 @@ const ListaProductos = () => {
     setProductoEditando(null);
   };
 
-{/* Tabla de productos */}
+  {/* Tabla de productos */}
   return (
     <div className="w-full h-full p-4">
       <h2 className="text-2xl font-bold mb-4">Lista de Productos</h2>
 
-      {productos.length === 0 ? (
+      {listaFiltrada.length === 0 ? (
         <p>No hay productos registrados</p>
       ) : (
         <div className="overflow-x-auto w-full h-full">
@@ -77,13 +108,13 @@ const ListaProductos = () => {
               </tr>
             </thead>
             <tbody>
-              {productos.map((prod) => (
+              {listaFiltrada.map((prod) => (
                 <tr key={prod.id}>
-                  <td className="border-2 border-AzulCeleste px-4 py-2">{prod.nombre}</td>
-                  <td className="border-2 border-AzulCeleste px-4 py-2">{prod.descripcion}</td>
+                  <td className="border-2 border-AzulCeleste px-4 py-2 max-w-[200px] break-words whitespace-normal">{prod.nombre}</td>
+                  <td className="border-2 border-AzulCeleste px-4 py-2 max-w-[800px] break-words whitespace-normal">{prod.descripcion}</td>
                   <td className="border-2 border-AzulCeleste px-4 py-2">${prod.precio}</td>
                   <td className="border-2 border-AzulCeleste px-4 py-2">{prod.stock}</td>
-                  <td className="border-2 border-AzulCeleste px-4 py-2">
+                  <td className="border-2 border-AzulCeleste px-4 py-2 w-[216px]">
                     <button
                       onClick={() => handleEditClick(prod)}
                       className="bg-yellow-500 hover:bg-yellow-600 text-white px-2 py-1 rounded mr-2"
