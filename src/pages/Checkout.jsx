@@ -15,12 +15,24 @@ function Checkout() {
   const total = subtotal + shipping - discount;
 
   const handleSubmit = (payload) => {
-    // En esta etapa solo simulamos el envío
     try {
-      console.log("[Checkout] Datos de pago", payload);
-      console.log("[Checkout] Carrito", cart);
-      alert("Pago enviado. Gracias por tu compra!");
-      navigate("/");
+      const items = cart.map((p) => ({ id: p.id, nombre: p.nombre, precio: p.precio, talle: p.talle ?? null, cantidad: p.cantidad ?? 1, imagen: p.imagen ?? null }));
+      const order = {
+        id: Date.now().toString(),
+        items,
+        total,
+        pago: {
+          tipoTarjeta: payload.tipoTarjeta,
+          ultimos4: payload.numero.slice(-4),
+          expiracion: payload.expiracion,
+        },
+        direccion: payload.direccion,
+        contacto: payload.contacto,
+        createdAt: new Date().toISOString(),
+      };
+      const prev = JSON.parse(localStorage.getItem('orders') || '[]');
+      localStorage.setItem('orders', JSON.stringify([order, ...prev]));
+      navigate('/compra-realizada');
     } catch (e) {
       console.error("Error en el pago", e);
       alert("Ocurrió un error al procesar el pago");

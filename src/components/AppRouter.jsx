@@ -9,6 +9,7 @@ import Perfil from "../pages/Perfil";
 import Producto from "../pages/Producto";
 import Index from "../pages/index";
 import Checkout from "../pages/Checkout";
+import CompraRealizada from "../components/CompraRealizada";
 
 // Redirección que abre popup en efecto para evitar setState durante render
 const LoginRedirect = ({ path }) => { //path ruta a la que el usuario se dirigía
@@ -51,6 +52,10 @@ const AppRouter = () => {
       <Route
         path="/checkout"
         element={<PrivateRoute path="/checkout" allowedRoles={["cliente","admin"]} element={<Checkout />} />}
+      />
+      <Route
+        path="/compra-realizada"
+        element={<PrivateRoute path="/compra-realizada" allowedRoles={["cliente","admin"]} element={<CompraRealizada />} />}
       />
       <Route
         path="/favoritos"
