@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { FcGoogle } from "react-icons/fc";
+import LogoFreedom from "../assets/img/freedom.png";
 
 function LoginPopup({ onClose, onSuccess }) {
   const { loginWithGoogle } = useContext(AppContext); //inicia sesión con Google
@@ -15,22 +17,33 @@ function LoginPopup({ onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-sm p-6">
-        <h2 className="text-xl font-bold mb-2">Iniciar sesión</h2>
-        <p className="text-sm text-gray-600 mb-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-AzulClaro p-6 rounded-lg border-4 border-Azul shadow-lg max-w-[500px] w-full relative">
+        <div className="flex justify-center">
+          <img src={LogoFreedom} alt="Logo Freedom" className="h-[150px] w-[300px] p-3"/>
+        </div>
+        <div className="flex justify-center">
+          <h2 className="text-lg font-bold mb-2">Iniciar Sesión</h2>
+        </div>
+        <p className="text-sm text-gray-700 mb-4 text-center">
           Para continuar, iniciá sesión o registrate.
         </p>
-        <div className="space-y-3">
+
+        <div className="flex flex-col items-center gap-3 w-full">
           <button
             onClick={handleLogin}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+            className="bg-Azul border-Azul border-4 hover:bg-AzulCeleste hover:border-Azul hover:border-4 
+                       font-bold hover:text-white py-2 px-4 rounded-full w-full max-w-[320px]
+                       hover:scale-105 transition-transform duration-300 ease-in-out flex items-center justify-center gap-2"
           >
+            <FcGoogle size={28} />
             Continuar con Google
           </button>
           <button
             onClick={onClose}
-            className="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded"
+            className="bg-gray-500 border-AzulClaro border-4 hover:bg-gray-600 hover:border-Azul hover:border-4 
+                       hover:text-white font-bold py-2 px-4 rounded-full w-full max-w-[320px]
+                       hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Cancelar
           </button>
