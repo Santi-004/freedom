@@ -8,6 +8,7 @@ const ListaUsuarios = ({ tipo, searchTerm = "", sort = "none" }) => {
 
   const [usuarioEditando, setUsuarioEditando] = useState(null); // id del usuario
   const [rolSeleccionado, setRolSeleccionado] = useState("cliente");
+  const [usuarioAEliminar, setUsuarioAEliminar] = useState(null);
 
   if (loading) return <p>Cargando usuarios...</p>;
 
@@ -84,7 +85,7 @@ const ListaUsuarios = ({ tipo, searchTerm = "", sort = "none" }) => {
                       Modificar rol
                     </button>
                     <button
-                      onClick={() => eliminarUsuario(user.id)}
+                      onClick={() => setUsuarioAEliminar(user)}
                       className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"
                     >
                       Eliminar
@@ -159,6 +160,44 @@ const ListaUsuarios = ({ tipo, searchTerm = "", sort = "none" }) => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Popup Confirmar Eliminación */}
+      {usuarioAEliminar && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-AzulClaro p-6 rounded-lg border-4 border-Azul shadow-lg max-w-[500px] w-full relative">
+            <div className="flex justify-center">
+              <h2 className="text-lg font-bold mb-4 text-center">¿Eliminar usuario?</h2>
+            </div>
+            <p className="text-center mb-6">
+              Estás a punto de eliminar "{usuarioAEliminar?.nombre ?? usuarioAEliminar?.email ?? "(sin nombre)"}".
+              Esta acción no se puede deshacer.
+            </p>
+            <div className="flex justify-center gap-4 mt-2 w-full max-w-[400px] mx-auto">
+              <button
+                type="button"
+                onClick={() => setUsuarioAEliminar(null)}
+                className="bg-gray-500 border-AzulClaro border-4 hover:bg-gray-600 hover:border-Azul hover:border-4 
+                           font-bold py-2 px-4 rounded-full w-full hover:text-white
+                           hover:scale-105 transition-transform duration-300 ease-in-out"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await eliminarUsuario(usuarioAEliminar.id);
+                  setUsuarioAEliminar(null);
+                }}
+                className="bg-red-600 border-AzulClaro border-4 hover:bg-red-700 hover:border-red-500 hover:border-4 
+                           font-bold py-2 px-4 rounded-full w-full text-white
+                           hover:scale-105 transition-transform duration-300 ease-in-out"
+              >
+                Eliminar
+              </button>
+            </div>
           </div>
         </div>
       )}

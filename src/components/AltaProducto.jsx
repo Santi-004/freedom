@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useProductos } from "../hooks/useProductos";
+import { HiOutlineX } from "react-icons/hi";
 
 {/* Componente que deja agrega un producto */}
 export default function AltaProducto() {
@@ -71,7 +72,7 @@ export default function AltaProducto() {
               onClick={() => setFormProducto(false)}
               className="absolute top-2 right-2 text-gray-600 hover:text-red-500 font-bold"
             >
-              ✖
+              <HiOutlineX size={32}/>
             </button>
 
             <div className="flex justify-center"><h2 className="text-lg font-bold mb-4">Agregar Producto</h2></div>

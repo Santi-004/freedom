@@ -15,6 +15,7 @@ const ListaProductos = ({ searchTerm = "", sort = "none" }) => {
   const [slide3, setSlide3] = useState("");
   const [slide4, setSlide4] = useState("");
   const [slide5, setSlide5] = useState("");
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
 
   if (loading) return <p>Cargando productos...</p>;
 
@@ -123,7 +124,7 @@ const ListaProductos = ({ searchTerm = "", sort = "none" }) => {
                     </button>
 
                     <button
-                      onClick={() => eliminarProducto(prod.id)}
+                      onClick={() => setProductoAEliminar(prod)}
                       className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded"
                     >
                       Eliminar
@@ -255,6 +256,44 @@ const ListaProductos = ({ searchTerm = "", sort = "none" }) => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Popup Confirmar Eliminación */}
+      {productoAEliminar && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-AzulClaro p-6 rounded-lg border-4 border-Azul shadow-lg max-w-[500px] w-full relative">
+            <div className="flex justify-center mb-4">
+              <h2 className="text-lg font-bold text-center">¿Eliminar producto?</h2>
+            </div>
+            <p className="text-center mb-6">
+              Estás a punto de eliminar "{productoAEliminar?.nombre ?? "(sin nombre)"}" de la base de datos.
+              Esta acción no se puede deshacer.
+            </p>
+            <div className="flex justify-center gap-4 w-full max-w-[400px] mx-auto">
+              <button
+                type="button"
+                onClick={() => setProductoAEliminar(null)}
+                className="bg-gray-500 border-AzulClaro border-4 hover:bg-gray-600 hover:border-Azul hover:border-4 
+                           font-bold py-2 px-4 rounded-full w-full hover:text-white
+                           hover:scale-105 transition-transform duration-300 ease-in-out"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  await eliminarProducto(productoAEliminar.id);
+                  setProductoAEliminar(null);
+                }}
+                className="bg-red-600 border-AzulClaro border-4 hover:bg-red-700 hover:border-red-500 hover:border-4 
+                           font-bold py-2 px-4 rounded-full w-full text-white
+                           hover:scale-105 transition-transform duration-300 ease-in-out"
+              >
+                Eliminar
+              </button>
+            </div>
           </div>
         </div>
       )}
