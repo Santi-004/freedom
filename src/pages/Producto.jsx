@@ -5,7 +5,7 @@ import FormTalle from "../components/FormTalle";
 import ButtonDrop from "../components/ButtonDrop";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaArrowRotateLeft } from "react-icons/fa6";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useProductos } from "../hooks/useProductos";
 import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
@@ -16,6 +16,7 @@ function Producto() {
     const { addToCart } = useContext(AppContext);
     const [talle, setTalle] = useState("");
     const [showAdded, setShowAdded] = useState(false);
+    const navigate = useNavigate();
 
     const producto = productos.find((p) => p.id === id);
 
@@ -76,8 +77,7 @@ function Producto() {
                               onClick={() => {
                                 if (!talle) return;
                                 addToCart({ id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null });
-                                setShowAdded(true);
-                                setTimeout(() => setShowAdded(false), 2000);
+                                navigate("/checkout");
                               }}
                               className={`font-bold py-2 px-4 rounded-full w-full transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
                             >
@@ -142,8 +142,7 @@ function Producto() {
                               onClick={() => {
                                 if (!talle) return;
                                 addToCart({ id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null });
-                                setShowAdded(true);
-                                setTimeout(() => setShowAdded(false), 2000);
+                                navigate("/checkout");
                               }}
                               className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
                             >

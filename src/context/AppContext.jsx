@@ -93,19 +93,42 @@ export const AppProvider = ({ children }) => {
       // Evitar duplicado exacto por id+talle
       if (item.talle) {
         const existsSameTalle = next.some((p) => p.id === item.id && p.talle === item.talle);
-        if (existsSameTalle) return next;
-        return [...next, item];
+        if (existsSameTalle) {
+          // Incrementar cantidad si ya existe
+          return next.map((p) =>
+            p.id === item.id && p.talle === item.talle
+              ? { ...p, cantidad: (p.cantidad ?? 1) + (item.cantidad ?? 1) }
+              : p
+          );
+        }
+        return [...next, { ...item, cantidad: item.cantidad ?? 1 }];
       }
 
       // Caso sin talle: evitar múltiples entradas sin talle del mismo producto
       const existsNoTalle = next.some((p) => p.id === item.id && !p.talle);
-      if (existsNoTalle) return next;
-      return [...next, item];
+      if (existsNoTalle) {
+        return next.map((p) =>
+          p.id === item.id && !p.talle ? { ...p, cantidad: (p.cantidad ?? 1) + (item.cantidad ?? 1) } : p
+        );
+      }
+      return [...next, { ...item, cantidad: item.cantidad ?? 1 }];
     });
   };
 
-  const removeFromCart = (id) =>
-    setCart((prev) => prev.filter((item) => item.id !== id)); //remueve un item del carrito
+  const updateQuantity = (id, talle, cantidad) => {
+    setCart((prev) =>
+      prev
+        .map((item) =>
+          item.id === id && (talle ? item.talle === talle : true)
+            ? { ...item, cantidad: Math.max(1, Number(cantidad) || 1) }
+            : item
+        )
+        .filter((item) => (talle ? !(item.id === id && item.talle === talle && (Number(cantidad) || 1) <= 0) : true))
+    );
+  };
+
+  const removeFromCart = (id, talle) =>
+    setCart((prev) => prev.filter((item) => (talle ? !(item.id === id && item.talle === talle) : item.id !== id))); //remueve un item del carrito
 
   const addToFavorites = (item) => { //agrega un item a los favoritos
     if (!user) { //si no hay usuario
@@ -155,6 +178,7 @@ export const AppProvider = ({ children }) => {
         cart, // carrito
         addToCart, // agregar al carrito
         removeFromCart, // remover del carrito
+        updateQuantity, // actualizar cantidad
         favorites, // favoritos
         addToFavorites, // agregar a favoritos
         removeFromFavorites, // remover de favoritos
