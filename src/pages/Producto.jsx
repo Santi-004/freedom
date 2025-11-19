@@ -52,7 +52,7 @@ function Producto() {
                         <Carousel images={slideImages} />
 
                         <div className="flex flex-col items-center mt-10 gap-3 w-full">
-                            <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" />
+                            <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" contenido={producto?.descripcion ?? "Sin descripción disponible"} />
                             <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" />
                             <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" />
                         </div>
@@ -126,7 +126,7 @@ function Producto() {
                     </div>
 
                     <div className="flex flex-col items-center gap-3 mt-5">
-                        <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" />
+                        <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" contenido={producto?.descripcion ?? "Sin descripción disponible"} />
                         <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" />
                         <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" />
                     </div>

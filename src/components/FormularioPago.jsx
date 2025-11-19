@@ -45,23 +45,23 @@ const FormularioPago = ({ onSubmit, total }) => {
   };
 
   return (
-    <form className="container py-3" onSubmit={handleSubmit}>
+    <form className="container py-2 py-md-3 px-2" onSubmit={handleSubmit}>
       <div className="mb-3">
         <h5 className="mb-2">Método de pago</h5>
-        <div className="d-flex gap-3">
-          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 ${tipoTarjeta === 'visa' ? 'border-primary' : 'border-secondary-subtle'}`}
+        <div className="d-flex flex-wrap gap-2 gap-md-3">
+          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 flex-grow-1 ${tipoTarjeta === 'visa' ? 'border-primary' : 'border-secondary-subtle'}`}
                  role="button">
             <input type="radio" name="tipoTarjeta" value="visa" className="form-check-input me-2" checked={tipoTarjeta === 'visa'} onChange={() => setTipoTarjeta('visa')} />
             <FaCcVisa size={28} />
             <span>Visa</span>
           </label>
-          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 ${tipoTarjeta === 'mastercard' ? 'border-primary' : 'border-secondary-subtle'}`}
+          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 flex-grow-1 ${tipoTarjeta === 'mastercard' ? 'border-primary' : 'border-secondary-subtle'}`}
                  role="button">
             <input type="radio" name="tipoTarjeta" value="mastercard" className="form-check-input me-2" checked={tipoTarjeta === 'mastercard'} onChange={() => setTipoTarjeta('mastercard')} />
             <FaCcMastercard size={28} />
             <span>Mastercard</span>
           </label>
-          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 ${tipoTarjeta === 'naranjax' ? 'border-primary' : 'border-secondary-subtle'}`}
+          <label className={`border rounded px-3 py-2 d-flex align-items-center gap-2 flex-grow-1 ${tipoTarjeta === 'naranjax' ? 'border-primary' : 'border-secondary-subtle'}`}
                  role="button">
             <input type="radio" name="tipoTarjeta" value="naranjax" className="form-check-input me-2" checked={tipoTarjeta === 'naranjax'} onChange={() => setTipoTarjeta('naranjax')} />
             <FaCreditCard size={28} />
@@ -96,7 +96,7 @@ const FormularioPago = ({ onSubmit, total }) => {
             required
           />
         </div>
-        <div className="col-6 col-md-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <label className="form-label">Mes</label>
           <select className="form-select" value={mes} onChange={(e) => setMes(e.target.value)} required>
             <option value="" disabled>MM</option>
@@ -105,7 +105,7 @@ const FormularioPago = ({ onSubmit, total }) => {
             ))}
           </select>
         </div>
-        <div className="col-6 col-md-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <label className="form-label">Año</label>
           <select className="form-select" value={anio} onChange={(e) => setAnio(e.target.value)} required>
             <option value="" disabled>AAAA</option>
@@ -138,15 +138,15 @@ const FormularioPago = ({ onSubmit, total }) => {
           <label className="form-label">Dirección</label>
           <input type="text" className="form-control" placeholder="Calle y número" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-sm-6">
           <label className="form-label">Ciudad</label>
           <input type="text" className="form-control" value={ciudad} onChange={(e) => setCiudad(e.target.value)} required />
         </div>
-        <div className="col-6 col-md-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <label className="form-label">Provincia</label>
           <input type="text" className="form-control" value={provincia} onChange={(e) => setProvincia(e.target.value)} required />
         </div>
-        <div className="col-6 col-md-3">
+        <div className="col-12 col-sm-6 col-md-3">
           <label className="form-label">Código Postal</label>
           <input type="text" className="form-control" value={cp} onChange={(e) => setCp(e.target.value)} required />
         </div>
@@ -185,8 +185,8 @@ const FormularioPago = ({ onSubmit, total }) => {
         </div>
       )}
 
-      <div className="d-flex justify-content-end mt-4">
-        <button type="submit" className="btn btn-primary">Pagar</button>
+      <div className="mt-4">
+        <button type="submit" className="btn btn-primary w-100 w-md-auto">Pagar</button>
       </div>
     </form>
   );
