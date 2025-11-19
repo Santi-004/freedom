@@ -17,10 +17,10 @@ const ABM = () => {
 
             {/* Div que contiene el menu de las colecciones. */}
               <div className="w-[400px] h-auto p-4 bg-Azul flex flex-col items-center justify-center">
-              <div className="w-full p-2"><button  className="bg-AzulClaro hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Empleados</button></div>
-              <div className="w-full p-2"><button className="bg-AzulClaro hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Clientes</button></div>
-              <div className="w-full p-2"><button onClick={() => setProd(true)} className="bg-AzulClaro hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Productos</button></div>
-              <div className="w-full p-2"><button className="bg-AzulClaro hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Categorias</button></div>
+              <div className="w-full p-2"><button  className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Empleados</button></div>
+              <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Clientes</button></div>
+              <div className="w-full p-2"><button onClick={() => setProd(true)} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Productos</button></div>
+              <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">Categorias</button></div>
             </div>
             <div className="flex flex-col items-center mx-auto w-auto m-10">
                 
