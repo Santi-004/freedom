@@ -27,7 +27,7 @@ function Footer(){
                     <h3 className='text-white text-2xl p-3 '>Contacto</h3>
                     
                     {/* Div de teléfono */}
-                    <div className='flex items-center gap-2 mt-2'>
+                    <div id='contacto' className='flex items-center gap-2 mt-2'>
                         <FaPhoneAlt className='h-6 w-auto text-white transform animacion-escala animacion-rotacion cursor-pointer' onClick={() => {navigator.clipboard.writeText("2994278970"); 
                             alert("¡Teléfono copiado al portapapeles!");}}/>
                         <div className='p-1'>

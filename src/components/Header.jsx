@@ -26,15 +26,17 @@ function Header() {
   };
 
   const goToSection = (id) => {
-    if (window.location.pathname === "/") {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
+    // Intentar scroll inmediato si el elemento ya existe (Footer está presente en todas las páginas)
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Fallback: navegar a home con hash para que el navegador haga el salto
+      if (window.location.pathname !== "/") {
+        navigate(`/#${id}`);
       } else {
         window.location.hash = id;
       }
-    } else {
-      navigate(`/#${id}`);
     }
     setMostrar(false);
   };

@@ -14,10 +14,10 @@ function CarouselHome() {
           <EjeploCarouselImagen src={banner1} text="Primera imagen" />
           <Carousel.Caption className="!absolute !bottom-0 !left-0 !right-0 !w-full bg-black/50 flex flex-col items-center justify-center py-8">
             <h3 className="text-white text-2xl font-semibold text-center">
-              Primera imagen
+              ACTITUD
             </h3>
             <p className="text-gray-200 text-center max-w-[90%] md:max-w-[70%]">
-              Moda urbana con actitud — conoce lo nuevo de Freedom.
+              Moda urbana con actitud, Freedom trae esa actitud juvenil.
             </p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -27,10 +27,10 @@ function CarouselHome() {
           <EjeploCarouselImagen src={banner2} text="Segunda imagen" />
           <Carousel.Caption className="!absolute !bottom-0 !left-0 !right-0 !w-full bg-black/50 flex flex-col items-center justify-center py-8">
             <h3 className="text-white text-2xl font-semibold text-center">
-              Segunda imagen
+              CARACTER
             </h3>
             <p className="text-gray-200 text-center max-w-[90%] md:max-w-[70%]">
-              Estilo y libertad, combinados en cada prenda.
+              Freedom es una marca que se representa por su caracter en Dios.
             </p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -40,10 +40,10 @@ function CarouselHome() {
           <EjeploCarouselImagen src={banner3} text="Tercera imagen" />
           <Carousel.Caption className="!absolute !bottom-0 !left-0 !right-0 !w-full bg-black/50 flex flex-col items-center justify-center py-8">
             <h3 className="text-white text-2xl font-semibold text-center">
-              Tercera imagen
+              IMPACTAR
             </h3>
             <p className="text-gray-200 text-center max-w-[90%] md:max-w-[70%]">
-              Inspirate con nuestras nuevas colecciones.
+              Freedom impacta a travez de cada mensaje que lleva en sus productos.
             </p>
           </Carousel.Caption>
         </Carousel.Item>

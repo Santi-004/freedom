@@ -34,6 +34,13 @@ function Index() {
     return () => window.removeEventListener('hashchange', scrollToHash);
   }, []);
 
+  // Asegurar que al abrir la home sin hash comience arriba de todo
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-AzulClaro">
       {/* Header */}
@@ -54,21 +61,30 @@ function Index() {
 >
   <h1 className="text-7xl font-extrabold text-center mb-12">Sobre Nosotros</h1>
   <p className="text-center text-2xl md:text-3xl max-w-5xl mx-auto leading-relaxed tracking-wide px-6">
-    Somos una empresa dedicada a ofrecer los mejores servicios...
+    Esta marca empezó con una idea de poder hacer que aquellas personas que quieran
+expresar el amor de Jesús, lo pueden hacer a través de nuestra ropa.
+Somos un grupo de 3 jóvenes buscando cambiar al mundo junto a las buenas noticias que trajo Jesús,
+un mensaje que trae libertad, amor, perdón y pasión por él, por eso mismo buscamos lograr la misión
+que nos encomendó nuestro señor, el cual es llevar y proclamar estas noticias y su palabra
+a los confines de la tierra.
   </p>
 </section>
 
-{/* ======= Sección: Contactos ======= */}
+{/* ======= Sección: Acerca ======= */}
 <section
-  id="contacto"  // este es el id
+  id="acerca"  // id propio para evitar conflicto con el footer
   className="contacto min-h-screen flex flex-col items-center justify-center bg-transparent text-gray-900"
   data-aos="fade-up"
   data-aos-delay="400"
 >
-  <h1 className="text-7xl font-extrabold text-center mb-12">Contactos</h1>
+  <h1 className="text-7xl font-extrabold text-center mb-12">Acerca De</h1>
   <p className="text-center text-2xl md:text-3xl max-w-4xl leading-relaxed tracking-wide">
-    📧 ejemplo@correo.com <br />
-    ☎️ 123-456-789
+ Nuestra indumentaria contiene diseños que están hechos por nosotros mismos,
+nuestra ropa busca bridar la mejor calidad posible hacia el cliente,
+por eso elaboramos cada una de nuestras prendas con la mejor calidad de tela posible,
+junto al mejor estampado para poder conseguir una mejor duración y calidad del mismo.
+Pero para poder lograr esto conseguimos proveedores de la zona de Neuquén y del país, el cual
+trabajan en nuestras prendas por pedido mayor, ellos también hacen que todo esto sea posible.
   </p>
 </section>
 

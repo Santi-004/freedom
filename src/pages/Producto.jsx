@@ -53,8 +53,8 @@ function Producto() {
 
                         <div className="flex flex-col items-center mt-10 gap-3 w-full">
                             <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" contenido={producto?.descripcion ?? "Sin descripción disponible"} />
-                            <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" />
-                            <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" />
+                            <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" contenido={"Producto 100% algodon, estampado de alta calidad, elaborados con productos dedicados al estampado y colocación del mismo sobre telas."} /> 
+                            <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" contenido={"Lavar y planchar con cuidado, planchado suave por la zona del estampado para evitar cualquier tipo de riesgos."} />
                         </div>
                     </div>
 
@@ -127,8 +127,8 @@ function Producto() {
 
                     <div className="flex flex-col items-center gap-3 mt-5">
                         <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" contenido={producto?.descripcion ?? "Sin descripción disponible"} />
-                        <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" />
-                        <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" />
+                        <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" contenido={"Producto 100% algodon, estampado de alta calidad, elaborados con productos dedicados al estampado y colocación del mismo sobre telas."} />
+                        <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" contenido={"Lavar y planchar con cuidado, planchado suave por la zona del estampado para evitar cualquier tipo de riesgos."} />
                     </div>
                 </div>
 
