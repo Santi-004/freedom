@@ -22,7 +22,10 @@ function RemeraCatalogo({ id, nombre, descripcion, precio, imagen }) {
 
   return (
     <div
-      className="flex flex-col p-2 w-60 h-70 border-4 rounded-lg border-black bg-Azul items-center cursor-pointer"
+      className="flex flex-col p-2 h-[500px] border-4 rounded-lg border-AzulCeleste bg-Azul items-center cursor-pointer mt-4 mb-4 
+                 w-full sm:w-[320px] md:basis-1/3 lg:basis-1/4 min-w-[400px] max-w-[400px]
+                 hover:bg-AzulCeleste hover:border-Azul hover:text-white
+                 transition-colors duration-300 ease-in-out hover:scale-105 transition-transform duration-300 ease-in-out aparecer"
       onClick={() => navigate(`/producto/${producto.id}`)}
       role="button"
       tabIndex={0}
@@ -54,15 +57,13 @@ function RemeraCatalogo({ id, nombre, descripcion, precio, imagen }) {
         </button>
       </div>
 
-      <div
-        className="p-2 w-full h-full"
-      >
-        <img className="w-full h-full" src={producto.imagen} alt="" />
+      <div className="p-2 max-w-[330px] w-full h-full">
+        <img className="w-full h-full rounded-lg object-cover" src={producto.imagen} alt="" />
       </div>
 
-      <div>
-        <p>Precio: ${producto.precio}</p>
-        <p>{producto.nombre}</p>
+      <div className="bg-AzulClaro p-2 w-[315px] rounded-lg">
+        <p className="text-md font-semibold mb-0">Precio: ${producto.precio}</p>
+        <p className="text-xl font-bold mb-0">{producto.nombre}</p>
       </div>
     </div>
   );

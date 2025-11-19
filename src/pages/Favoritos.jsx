@@ -3,9 +3,11 @@ import Footer from "../components/Footer";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Favoritos() {
   const { favorites, removeFromFavorites } = useContext(AppContext);
+  const navigate = useNavigate();
 
   // Función para manejar el click async sin bloquear el UI (puedes mejorar con estados de carga)
   const handleRemove = async (id) => {
@@ -26,29 +28,50 @@ function Favoritos() {
         {favorites.length === 0 ? (
           <p className="text-2xl">No tienes favoritos</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-4">
             {favorites.map((producto, index) => (
-              <div key={index} className="bg-Azul/70 border-4 border-black rounded-2xl p-4">
-                <div className="relative bg-AzulClaro rounded-xl border-2 border-AzulCeleste h-64 flex items-center justify-center">
-                  {producto.imagen ? (
-                    <img src={producto.imagen} alt={producto.nombre} className="object-contain max-h-full" />
-                  ) : (
-                    <div className="text-sm text-gray-700">Sin imagen</div>
-                  )}
+              <div
+                key={index}
+                className="flex flex-col p-2 h-[500px] border-4 rounded-lg border-AzulCeleste bg-Azul items-center cursor-pointer mt-4 mb-4 
+                           w-full sm:w-[320px] md:basis-1/3 lg:basis-1/4 min-w-[400px] max-w-[400px]
+                           hover:bg-AzulCeleste hover:border-Azul hover:text-white
+                           transition-colors duration-300 ease-in-out hover:scale-105 transition-transform duration-300 ease-in-out aparecer"
+                onClick={() => navigate(`/producto/${producto.id}`)}
+                role="button"
+                tabIndex={0}
+              >
+                <div className="flex w-full justify-end">
                   <button
-                    className="absolute top-2 right-2 text-yellow-400 hover:scale-110 transition"
+                    className="ml-auto text-yellow-400 hover:scale-110 transition"
                     title="Quitar de favoritos"
-                    onClick={() => handleRemove(producto.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemove(producto.id);
+                    }}
                   >
                     <FaStar className="h-7 w-7 drop-shadow" />
                   </button>
                 </div>
 
-                <div className="mt-4 bg-AzulClaro rounded-2xl px-4 py-3 text-center">
-                  <div className="font-extrabold">
-                    ${ (producto.precio ?? 0).toLocaleString('es-AR') }
-                  </div>
-                  <div className="font-semibold">{producto.nombre}</div>
+                <div className="p-2 max-w-[330px] w-full h-full">
+                  {producto.imagen ? (
+                    <img
+                      src={producto.imagen}
+                      alt={producto.nombre}
+                      className="w-full h-full rounded-lg object-cover"
+                    />
+                  ) : (
+                    <div className="text-sm text-gray-200 bg-AzulClaro rounded-lg p-4 text-center">
+                      Sin imagen
+                    </div>
+                  )}
+                </div>
+
+                <div className="bg-AzulClaro p-2 w-[315px] rounded-lg text-center">
+                  <p className="text-md font-semibold mb-0">
+                    Precio: ${ (producto.precio ?? 0).toLocaleString('es-AR') }
+                  </p>
+                  <p className="text-xl font-bold mb-0">{producto.nombre}</p>
                 </div>
               </div>
             ))}

@@ -99,3 +99,34 @@ body{
 .swiper-button-prev::after {
     color: black;
 }
+
+
+@keyframes aparecer {
+    0% {
+        scale: 0.8;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+.aparecer {
+    animation: aparecer linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+@keyframes aparecer-izq {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.aparecer-izq {
+    animation: aparecer-izq linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
