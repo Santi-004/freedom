@@ -23,7 +23,7 @@ function CompraRealizada() {
         </p>
         <div className="flex gap-4 justify-center">
           <button
-            onClick={() => navigate("/perfil", { replace: true })}
+            onClick={() => navigate("/pedidos", { replace: true })}
             className="bg-Azul hover:bg-AzulCeleste text-white font-bold py-2 px-6 rounded-full hover:scale-105 transition"
           >
             Ver mis pedidos

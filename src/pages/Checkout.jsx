@@ -136,7 +136,7 @@ function Checkout() {
 
   // Si el acceso es válido pero aún no hay items (estado en tránsito), mostrar una espera breve
   const allowed = typeof window !== 'undefined' && sessionStorage.getItem('checkoutAllowed') === '1';
-  if (allowed && cart.length === 0) {
+  if (allowed && itemsForCheckout.length === 0) {
     return (
       <div className="bg-AzulClaro min-h-screen flex items-center justify-center">
         Cargando...
