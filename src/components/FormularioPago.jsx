@@ -39,7 +39,7 @@ const FormularioPago = ({ onSubmit, total }) => {
   };
 
   const formatearNumero = (value) => {
-    const digits = value.replace(/\D/g, '').slice(0, 19);
+    const digits = value.replace(/\D/g, '').slice(0, 16);
     const grupos = digits.match(/.{1,4}/g) || [];
     return grupos.join(' ');
   };
@@ -81,6 +81,7 @@ const FormularioPago = ({ onSubmit, total }) => {
             placeholder="0000 0000 0000 0000"
             value={numero}
             onChange={(e) => setNumero(formatearNumero(e.target.value))}
+            maxLength={19}
             required
           />
         </div>

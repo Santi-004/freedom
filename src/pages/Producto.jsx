@@ -77,7 +77,6 @@ function Producto() {
                               onClick={() => {
                                 if (!talle) return;
                                 const item = { id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null, cantidad: 1 };
-                                addToCart(item);
                                 sessionStorage.setItem('checkoutSingle', JSON.stringify([item]));
                                 sessionStorage.setItem('checkoutAllowed', '1');
                                 navigate("/checkout", { state: { fromProduct: true } });
@@ -148,7 +147,8 @@ function Producto() {
                               disabled={!talle}
                               onClick={() => {
                                 if (!talle) return;
-                                addToCart({ id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null });
+                                const item = { id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null, cantidad: 1 };
+                                sessionStorage.setItem('checkoutSingle', JSON.stringify([item]));
                                 sessionStorage.setItem('checkoutAllowed', '1');
                                 navigate("/checkout", { state: { fromProduct: true } });
                               }}

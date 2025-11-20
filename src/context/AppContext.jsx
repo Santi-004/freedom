@@ -60,20 +60,6 @@ export const AppProvider = ({ children }) => {
             window.__notiUnsub && window.__notiUnsub();
             window.__notiUnsub = unsubNoti;
           } catch {}
-
-          // Crear notificación de inicio de sesión (una vez por sesión) para usuarios existentes
-          try {
-            const onceKey = `loginNotified:${currentUser.uid}`;
-            if (!sessionStorage.getItem(onceKey)) {
-              await addDoc(collection(db, "users", currentUser.uid, "notifications"), {
-                type: "login",
-                message: `Iniciaste sesión`,
-                createdAt: serverTimestamp(),
-                read: false,
-              });
-              sessionStorage.setItem(onceKey, "1");
-            }
-          } catch {}
         } else {
           const newUser = { //crea un nuevo usuario
             nombre: currentUser.displayName, //nombre del usuario
@@ -98,20 +84,6 @@ export const AppProvider = ({ children }) => {
             // Guardar en closure para limpiar en logout
             window.__notiUnsub && window.__notiUnsub();
             window.__notiUnsub = unsubNoti;
-          } catch {}
-
-          // Crear notificación de inicio de sesión (una vez por sesión)
-          try {
-            const onceKey = `loginNotified:${currentUser.uid}`;
-            if (!sessionStorage.getItem(onceKey)) {
-              await addDoc(collection(db, "users", currentUser.uid, "notifications"), {
-                type: "login",
-                message: `Iniciaste sesión`,
-                createdAt: serverTimestamp(),
-                read: false,
-              });
-              sessionStorage.setItem(onceKey, "1");
-            }
           } catch {}
         }
       } else {
@@ -221,6 +193,8 @@ export const AppProvider = ({ children }) => {
   const removeFromCart = (id, talle) =>
     setCart((prev) => prev.filter((item) => (talle ? !(item.id === id && item.talle === talle) : item.id !== id))); //remueve un item del carrito
 
+  const clearCart = () => setCart([]);
+
   const addToFavorites = (item) => { //agrega un item a los favoritos
     if (!user) { //si no hay usuario
       setShowLogin(true); //abre el popup de login
@@ -246,6 +220,18 @@ export const AppProvider = ({ children }) => {
         email: user.email, //email del usuario
         rol: "cliente", //rol del usuario
       });
+    }
+
+    // Crear notificación de inicio de sesión en cada login explícito
+    try {
+      await addDoc(collection(db, "users", user.uid, "notifications"), {
+        type: "login",
+        message: `Iniciaste sesión`,
+        createdAt: serverTimestamp(),
+        read: false,
+      });
+    } catch (e) {
+      try { console.warn('[Noti] No se pudo crear notificación de login', e); } catch {}
     }
   };
 
@@ -283,6 +269,7 @@ export const AppProvider = ({ children }) => {
         addToCart, // agregar al carrito
         removeFromCart, // remover del carrito
         updateQuantity, // actualizar cantidad
+        clearCart, // vaciar carrito
         favorites, // favoritos
         addToFavorites, // agregar a favoritos
         removeFromFavorites, // remover de favoritos

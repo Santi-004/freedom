@@ -5,32 +5,45 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { db } from "../config/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Checkout() {
-  const { cart, user } = useContext(AppContext);
+  const { cart, user, clearCart } = useContext(AppContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Permitir acceso solo si venimos desde Carrito (marca de sesión)
+  // Preparar los ítems a pagar antes de los guards
+  const singleRaw = typeof window !== 'undefined' ? sessionStorage.getItem('checkoutSingle') : null;
+  let singleItems = [];
+  try { singleItems = singleRaw ? JSON.parse(singleRaw) : []; } catch {}
+  const itemsForCheckout = (singleItems && singleItems.length > 0) ? singleItems : cart;
+
+  // Permitir acceso solo si venimos desde Carrito/Producto (marca de sesión)
   useEffect(() => {
     const allowed = sessionStorage.getItem('checkoutAllowed') === '1';
+    const justPurchased = sessionStorage.getItem('justPurchased') === '1';
     if (!allowed) {
       navigate('/carrito', { replace: true });
       return;
     }
 
-    // Bloquear volver atrás hacia Checkout
+    // Bloquear volver atrás manteniendo al usuario en Checkout
     const onPopState = () => {
-      navigate('/carrito', { replace: true });
+      try {
+        if (window.location.pathname === '/checkout') {
+          window.history.pushState(null, '', window.location.href);
+        }
+      } catch {}
     };
     window.history.pushState(null, '', window.location.href);
     window.addEventListener('popstate', onPopState);
 
-    // Si venimos con permiso pero aún no llegó el estado del carrito, dar un pequeño margen.
-    if (cart.length === 0) {
+    // Si venimos con permiso pero aún no llegaron los ítems a pagar, dar un pequeño margen.
+    if (!justPurchased && itemsForCheckout.length === 0) {
       const t = setTimeout(() => {
         const stillAllowed = sessionStorage.getItem('checkoutAllowed') === '1';
-        if (stillAllowed && cart.length === 0) {
+        const stillJustPurchased = sessionStorage.getItem('justPurchased') === '1';
+        if (!stillJustPurchased && stillAllowed && itemsForCheckout.length === 0) {
           navigate('/carrito', { replace: true });
         }
       }, 300);
@@ -43,12 +56,8 @@ function Checkout() {
     return () => {
       window.removeEventListener('popstate', onPopState);
     };
-  }, [cart.length, navigate]);
+  }, [itemsForCheckout.length, navigate]);
 
-  const singleRaw = typeof window !== 'undefined' ? sessionStorage.getItem('checkoutSingle') : null;
-  let singleItems = [];
-  try { singleItems = singleRaw ? JSON.parse(singleRaw) : []; } catch {}
-  const itemsForCheckout = (singleItems && singleItems.length > 0) ? singleItems : cart;
   const subtotal = itemsForCheckout.reduce((sum, p) => sum + (p.precio ?? 0) * (p.cantidad ?? 1), 0);
   const shipping = itemsForCheckout.length > 0 ? 10000 : 0; // mismo placeholder que en Carrito
   const discount = 0;
@@ -83,13 +92,45 @@ function Checkout() {
         createdAt: serverTimestamp(),
         read: false,
       });
-      // Evitar reingreso al checkout con atrás/URL
-      sessionStorage.removeItem('checkoutAllowed');
-      sessionStorage.removeItem('checkoutSingle');
-      navigate('/compra-realizada');
+      // Primero navegar a compra realizada para evitar que el guard redirija al carrito
+      try { sessionStorage.setItem('justPurchased', '1'); } catch {}
+      navigate('/compra-realizada', { replace: true });
+      // Reintento defensivo por si algún efecto ajeno interfiere
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && window.location.pathname !== '/compra-realizada') {
+          navigate('/compra-realizada', { replace: true });
+        }
+      }, 50);
+      // Luego limpiar flags de sesión de forma asíncrona
+      setTimeout(() => {
+        try {
+          // Si es compra desde el carrito (no single), vaciar carrito
+          if (!singleItems || singleItems.length === 0) {
+            try { clearCart(); } catch {}
+          }
+          sessionStorage.removeItem('checkoutAllowed');
+          sessionStorage.removeItem('checkoutSingle');
+          sessionStorage.removeItem('justPurchased');
+        } catch {}
+      }, 0);
     } catch (e) {
       console.error("Error en el pago", e);
       alert("Ocurrió un error al procesar el pago");
+      // Aún así, navegar a compra realizada para no quedar trabado en checkout
+      try { sessionStorage.setItem('justPurchased', '1'); } catch {}
+      navigate('/compra-realizada', { replace: true });
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && window.location.pathname !== '/compra-realizada') {
+          navigate('/compra-realizada', { replace: true });
+        }
+      }, 50);
+      setTimeout(() => {
+        try {
+          sessionStorage.removeItem('checkoutAllowed');
+          sessionStorage.removeItem('checkoutSingle');
+          sessionStorage.removeItem('justPurchased');
+        } catch {}
+      }, 0);
     }
   };
 

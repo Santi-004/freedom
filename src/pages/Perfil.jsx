@@ -16,8 +16,6 @@ function Perfil(){
                 <div className="hidden lg:flex flex w-full">
                     {/* Div que contiene el menu de información*/}
                     <div className="w-[400px] h-auto p-4 bg-Azul flex flex-col items-center justify-center">
-                        <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">INFORMACIÓN DE LA CUENTA</button></div>
-                        <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">METODOS DE PAGO</button></div>
                         <div className="w-full p-2"><button onClick={() => navigate('/pedidos')} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">PEDIDOS</button></div>
                         <div className="w-full p-2">
                           <div className="relative max-w-[400px] w-full group">
@@ -27,7 +25,6 @@ function Perfil(){
                             )}
                           </div>
                         </div>
-                        <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">AYUDA</button></div>
                         <div className="w-full p-2 text-white"><button onClick={logout} className="bg-AzulCeleste border-Azul border-4 hover:bg-AzulClaro hover:border-AzulCeleste hover:border-4 max-w-[400px] font-bold hover:text-black py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">CERRAR SESIÓN</button></div>
                     </div>
                     
