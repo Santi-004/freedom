@@ -6,10 +6,10 @@ function ButtonDrop({textoMostrar , textoCerrar, contenido}){
   const [mostrar, setMostrar] = useState(false);
 
   return (
-    <div className="w-full p-10 pb-5 pt-0">
+    <div className="w-full px-0 pt-0 pb-3">
       <button
         onClick={() => setMostrar(!mostrar)}
-        className="border text-white text-xl bg-Azul hover:bg-AzulCeleste justify-end font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out"
+        className="border text-white text-xl bg-Azul border-4 hover:bg-AzulCeleste justify-end font-bold py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out"
       >
         <div className="relative w-full text-center">
             {mostrar ? textoCerrar : textoMostrar}
@@ -21,8 +21,8 @@ function ButtonDrop({textoMostrar , textoCerrar, contenido}){
       </button>
 
       {mostrar && (
-        <div className="m-1 w-full bg-Azul flex-col items-center dropdownmenuanimacion">
-          <div className="max-w-[700px] pl-10 pr-10">
+        <div className="mt-2 w-full bg-Azul flex flex-col items-center dropdownmenuanimacion">
+          <div className="w-full px-4 py-3">
             {contenido}
           </div>
         </div>

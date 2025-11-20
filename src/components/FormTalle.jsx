@@ -6,7 +6,8 @@ function FormTalle({ value = '', onChange = () => {}, talles = ['S', 'M', 'L', '
     return (
         <div>
             <form>
-                <div className="flex m-10 items-center justify-center flex-wrap">
+                <div className="flex m-4 items-center justify-center flex-wrap">
+
                     {talles.map((t) => (
                         <label key={t} className="cursor-pointer">
                             <input
@@ -18,11 +19,14 @@ function FormTalle({ value = '', onChange = () => {}, talles = ['S', 'M', 'L', '
                                 className="hidden peer"
                             />
                             <div 
-                                className=" m-2 rounded-md w-[50px] h-[50px] bg-Azul flex items-center justify-center
-                                            peer-checked:bg-AzulCeleste peer-checked:scale-110 animacion-escala transition-transform duration-300 ease-in-out transition peer-checked:font-bold
-                                ">
+                                className="m-1 w-[50px] h-[50px] flex items-center justify-center rounded-lg border-4 border-Azul bg-AzulClaro font-semibold
+                                           transition-transform duration-300 ease-in-out animacion-escala
+                                           hover:bg-Azul hover:text-white hover:border-AzulCeleste hover:scale-110 hover:font-bold
+                                           peer-checked:bg-Azul peer-checked:text-white peer-checked:border-AzulCeleste peer-checked:scale-110 peer-checked:font-bold"
+                            >
                                 {t}
                             </div>
+
                         </label>
                     ))}
                 </div>

@@ -45,13 +45,13 @@ function Producto() {
 
             {/* DESKTOP */}
             <div className="hidden lg:flex w-full justify-center">
-               <div className="bg-Azul flex border-2 mt-10 rounded-xl max-w-[1300px] w-full mx-auto p-5 gap-16 px-24">
+               <div className="bg-Azul flex border-2 mt-10 mb-10 rounded-xl border-AzulCeleste border-4 max-w-[1300px] w-full mx-auto p-5 gap-16 px-24">
 
                     {/* FOTOS */}
                     <div className="flex flex-col w-[55%] items-center">
                         <Carousel images={slideImages} />
 
-                        <div className="flex flex-col items-center mt-10 gap-3 w-full">
+                        <div className="flex flex-col items-center mt-5 w-full">
                             <ButtonDrop textoCerrar="Descripción" textoMostrar="Descripción" contenido={producto?.descripcion ?? "Sin descripción disponible"} />
                             <ButtonDrop textoCerrar="Calidad" textoMostrar="Calidad" contenido={"Producto 100% algodon, estampado de alta calidad, elaborados con productos dedicados al estampado y colocación del mismo sobre telas."} /> 
                             <ButtonDrop textoCerrar="Cuidado de la Ropa" textoMostrar="Cuidado de la Ropa" contenido={"Lavar y planchar con cuidado, planchado suave por la zona del estampado para evitar cualquier tipo de riesgos."} />
@@ -59,7 +59,7 @@ function Producto() {
                     </div>
 
                     {/* CAJA DE TALLES */}
-                    <div className="bg-AzulClaro w-full max-w-[450px] border-2 rounded-xl p-10 flex flex-col justify-start">
+                    <div className="bg-AzulClaro w-full max-w-[450px] border-4 border-AzulCeleste rounded-xl p-10 flex flex-col justify-start">
                         <div className="text-center mb-5">
                             <h1>{producto?.nombre ?? `Producto ${id}`}</h1>
                         </div>
@@ -71,7 +71,7 @@ function Producto() {
                         <FormTalle value={talle} onChange={setTalle} />
 
                     {/* Acá veremos info del envio y devolución y podremos concluir la compra y agregar al carrito */}
-                        <div className="my-5">
+                        <div className="mt-4 mb-2">
                             <button
                               disabled={!talle}
                               onClick={() => {
@@ -82,13 +82,15 @@ function Producto() {
                                 sessionStorage.setItem('checkoutAllowed', '1');
                                 navigate("/checkout", { state: { fromProduct: true } });
                               }}
-                              className={`font-bold py-2 px-4 rounded-full w-full transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
+                              className={`font-bold py-2 px-4 rounded-full w-full transition-transform duration-300 ease-in-out ${!talle
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-Azul border-Azul border-4 hover:bg-AzulCeleste hover:border-Azul hover:border-4 hover:text-white hover:scale-105'}`}
                             >
                                 Comprar Ahora
                             </button>
                         </div>
 
-                        <div className="my-5">
+                        <div className="my-2">
                             <button
                               disabled={!talle}
                               onClick={() => {
@@ -97,20 +99,22 @@ function Producto() {
                                 setShowAdded(true);
                                 setTimeout(() => setShowAdded(false), 2000);
                               }}
-                              className={`font-bold py-2 px-4 rounded-full w-full transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
+                              className={`font-bold py-2 px-4 rounded-full w-full transition-transform duration-300 ease-in-out ${!talle
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-Azul border-Azul border-4 hover:bg-AzulCeleste hover:border-Azul hover:border-4 hover:text-white hover:scale-105'}`}
                             >
                                 Agregar al Carrito
                             </button>
                         </div>
 
-                    <div className="flex items-center gap-3 mb-5 mt-5">
+                    <div className="flex items-center gap-2 mt-4">
                        <TbTruckDelivery className="text-4xl" />
-                        <p className="text-lg leading-none">Envío a todo el país</p>
+                        <div className="justify-center text-center"><p className="text-lg leading-none m-0">Envío a todo el país</p></div>
                     </div>
 
-                    <div className="flex items-center gap-3 mb-5 mt-5">
+                    <div className="flex items-center gap-3 mt-5">
                       <FaArrowRotateLeft className="text-4xl" />
-                        <p className="text-lg leading-none">Devolución antes de los 7 días</p>
+                        <div className="justify-center text-center"><p className="text-lg leading-none m-0">Devolución antes de los 7 días</p></div>
                     </div>
                     </div>
                 </div>
@@ -139,7 +143,7 @@ function Producto() {
                     <div className="max-w-[520px] mx-auto w-full">
                         <FormTalle value={talle} onChange={setTalle} />
 
-                        <div className="my-5">
+                        <div className="mt-4 mb-2">
                             <button
                               disabled={!talle}
                               onClick={() => {
@@ -148,13 +152,15 @@ function Producto() {
                                 sessionStorage.setItem('checkoutAllowed', '1');
                                 navigate("/checkout", { state: { fromProduct: true } });
                               }}
-                              className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
+                              className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition-transform duration-300 ease-in-out ${!talle
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-Azul border-Azul border-4 hover:bg-AzulCeleste hover:border-Azul hover:border-4 hover:text-white hover:scale-105'}`}
                             >
                                 Comprar Ahora
                             </button>
                         </div>
 
-                        <div className="my-5">
+                        <div className="my-2">
                             <button
                               disabled={!talle}
                               onClick={() => {
@@ -163,20 +169,21 @@ function Producto() {
                                 setShowAdded(true);
                                 setTimeout(() => setShowAdded(false), 2000);
                               }}
-                              className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
+                              className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition-transform duration-300 ease-in-out ${!talle
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-Azul border-Azul border-4 hover:bg-AzulCeleste hover:border-Azul hover:border-4 hover:text-white hover:scale-105'}`}
                             >
                                 Agregar al Carrito
                             </button>
                         </div>
-
-                        <div className="flex items-center gap-2 mb-5 mt-5">
-                            <TbTruckDelivery className="h-6" />
-                            <p>Envío a todo el país</p>
+                        <div className="flex items-center gap-2 mt-4">
+                        <TbTruckDelivery className="text-4xl" />
+                            <div className="justify-center text-center"><p className="text-lg leading-none m-0">Envío a todo el país</p></div>
                         </div>
 
-                        <div className="flex items-center gap-2 mb-5 mt-5">
-                            <FaArrowRotateLeft className="h-6" />
-                            <p>Devolución antes de los 7 días</p>
+                        <div className="flex items-center gap-3 mt-5">
+                        <FaArrowRotateLeft className="text-4xl" />
+                            <div className="justify-center text-center"><p className="text-lg leading-none m-0">Devolución antes de los 7 días</p></div>
                         </div>
                     </div>
                 </div>

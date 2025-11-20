@@ -34,12 +34,12 @@ const Carousel = ({ images = [] }) => {
   };
 
   return (
-    <div>
-      {/* DESKTOP */}
-      <div className="w-full max-w-[750px] m-10 hidden lg:flex gap-5 p-12">
+    <div className="justify-center items-center flex">
+      {/* DESKTOP (>= xl) */}
+      <div className="w-full max-w-[750px] m-10 hidden xl:flex gap-5 p-12">
 
         {/* Miniaturas */}
-        <div className="w-[15%] flex flex-col items-center">
+        <div className="w-[15%] flex flex-col items-center justify-center">
           {slides.map((slide, index) => (
             <button
               key={slide.id}
@@ -47,7 +47,7 @@ const Carousel = ({ images = [] }) => {
               className="w-14 h-14 rounded-md overflow-hidden mb-3 hover:scale-105 transition"
             >
               {slide.image ? (
-                <img src={slide.image} className="w-full h-full object-cover" />
+                <img src={slide.image} className="w-full h-full object-cover rounded-xl border-2 border-AzulCeleste" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-xs text-white">
                   {slide.text}
@@ -73,7 +73,7 @@ const Carousel = ({ images = [] }) => {
             {slides.map((slide) => (
               <SwiperSlide key={slide.id}>
                 {slide.image ? (
-                  <img src={slide.image} className="w-full h-full object-contain" />
+                  <img src={slide.image} className="w-full h-full object-contain rounded-xl border-4 border-AzulCeleste" />
                 ) : (
                   <div className="h-full flex items-center justify-center text-2xl text-white">
                     {slide.text}
@@ -85,8 +85,8 @@ const Carousel = ({ images = [] }) => {
         </div>
       </div>
 
-      {/* TABLET */}
-      <div className="max-w-[700px] w-full m-10 hidden mid:flex">
+      {/* TABLET (md to < xl) */}
+      <div className="max-w-[580px] w-full m-4 hidden md:flex xl:hidden flex-col">
         <Swiper
           onSwiper={(swiper) => (swiperRefmid.current = swiper)}
           modules={[Navigation, Pagination]}
@@ -96,12 +96,12 @@ const Carousel = ({ images = [] }) => {
           slidesPerView={1}
           loop={isMulti}
           grabCursor={true}
-          className="rounded-xl w-full h-[55vh]"
+          className="rounded-xl w-full h-[55vh] max-w-[570px]"
         >
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               {slide.image ? (
-                <img src={slide.image} className="w-full h-full object-contain" />
+                <img src={slide.image} className="w-full h-full object-contain rounded-xl border-4 border-AzulCeleste" />
               ) : (
                 <div className="h-full flex items-center justify-center text-2xl text-white">
                   {slide.text}
@@ -110,10 +110,29 @@ const Carousel = ({ images = [] }) => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Miniaturas debajo en tablet */}
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(index)}
+              className="w-14 h-14 rounded-md overflow-hidden hover:scale-105 transition"
+            >
+              {slide.image ? (
+                <img src={slide.image} className="w-full h-full object-cover rounded-xl border-2 border-AzulCeleste" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-xs text-white">
+                  {slide.text}
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* MOBILE */}
-      <div className="flex flex-col lg:hidden">
+      {/* MOBILE (< md) */}
+      <div className="flex flex-col md:hidden">
         <Swiper
           onSwiper={(swiper) => (swiperRefMobile.current = swiper)}
           modules={[Pagination]}
@@ -127,7 +146,7 @@ const Carousel = ({ images = [] }) => {
           {slides.map((slide) => (
             <SwiperSlide key={slide.id}>
               {slide.image ? (
-                <img src={slide.image} className="w-full h-full object-contain" />
+                <img src={slide.image} className="w-full h-full object-contain rounded-xl border-4 border-AzulCeleste" />
               ) : (
                 <div className="h-full flex items-center justify-center text-2xl text-white">
                   {slide.text}
@@ -136,6 +155,25 @@ const Carousel = ({ images = [] }) => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Miniaturas debajo en mobile */}
+        <div className="mt-4 mb-2 flex flex-wrap justify-center gap-3">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              onClick={() => goToSlide(index)}
+              className="w-12 h-12 rounded-md overflow-hidden hover:scale-105 transition"
+            >
+              {slide.image ? (
+                <img src={slide.image} className="w-full h-full object-cover rounded-lg border-2 border-AzulCeleste" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-[10px] text-white">
+                  {slide.text}
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
