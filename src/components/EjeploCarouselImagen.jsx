@@ -6,8 +6,8 @@ function EjeploCarouselImagen({ text, src }) {
       className="d-block w-100"
       style={{
         objectFit: "cover",
-        height: "700px",
-        width: "100%",     // ancho al 100% del contenedor
+        height: "calc(100vh - 80px)", // ocupa el alto de la pantalla menos aprox. el header
+        width: "100%", // ancho al 100% del contenedor
         borderRadius: "8px",
       }}
     />

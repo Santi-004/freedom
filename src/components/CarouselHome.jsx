@@ -6,7 +6,7 @@ import banner3 from "../assets/img/banner3.jpeg";
 
 function CarouselHome() {
   return (
-    <div className="max-w-[1800px] mx-auto">
+    <div className="w-full mx-auto">
       <Carousel fade interval={3000} pause="hover">
 
         {/* Slide 1 */}
