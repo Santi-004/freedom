@@ -2,7 +2,7 @@
 import { createContext, useState, useEffect } from "react";
 import { auth, db, googleProvider } from "../config/firebase";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, onSnapshot, orderBy, query, addDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 export const AppContext = createContext();
 
@@ -13,6 +13,8 @@ export const AppProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
   const [showLogin, setShowLogin] = useState(false);
   const [intendedPath, setIntendedPath] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   // Detectar si el usuario está logueado
   useEffect(() => {
@@ -40,6 +42,38 @@ export const AppProvider = ({ children }) => {
           //registra el usuario en la consola
           try { console.log("[Auth] User set from Firestore+Auth:", { uid: currentUser.uid, rol: (data.rol ?? "cliente").toString().trim().toLowerCase() }); } catch {} 
           setShowLogin(false); //cierra el popup de login
+
+          // Cargar carrito y favoritos desde Firestore si existen
+          try {
+            if (Array.isArray(data.cart)) setCart(data.cart);
+            if (Array.isArray(data.favorites)) setFavorites(data.favorites);
+          } catch {}
+
+          // Suscribirse a notificaciones del usuario (usuarios existentes)
+          try {
+            const q = query(collection(db, "users", currentUser.uid, "notifications"), orderBy("createdAt", "desc"));
+            const unsubNoti = onSnapshot(q, (snap) => {
+              const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+              setNotifications(list);
+              setUnreadCount(list.filter((n) => !n.read).length);
+            });
+            window.__notiUnsub && window.__notiUnsub();
+            window.__notiUnsub = unsubNoti;
+          } catch {}
+
+          // Crear notificación de inicio de sesión (una vez por sesión) para usuarios existentes
+          try {
+            const onceKey = `loginNotified:${currentUser.uid}`;
+            if (!sessionStorage.getItem(onceKey)) {
+              await addDoc(collection(db, "users", currentUser.uid, "notifications"), {
+                type: "login",
+                message: `Iniciaste sesión`,
+                createdAt: serverTimestamp(),
+                read: false,
+              });
+              sessionStorage.setItem(onceKey, "1");
+            }
+          } catch {}
         } else {
           const newUser = { //crea un nuevo usuario
             nombre: currentUser.displayName, //nombre del usuario
@@ -47,14 +81,44 @@ export const AppProvider = ({ children }) => {
             photoURL: currentUser.photoURL ?? null, //foto del usuario
             rol: "cliente", //rol del usuario
           };
-          await setDoc(userRef, newUser); //guarda el nuevo usuario en Firestore
+          await setDoc(userRef, { ...newUser, cart: [], favorites: [] }); //guarda el nuevo usuario en Firestore
           setUser({ uid: currentUser.uid, ...newUser }); //establece el nuevo usuario
           //registra el usuario en la consola
           try { console.log("[Auth] New user created and set:", { uid: currentUser.uid, rol: "cliente" }); } catch {} 
           setShowLogin(false); //cierra el popup de login
+
+          // Suscribirse a notificaciones del usuario
+          try {
+            const q = query(collection(db, "users", currentUser.uid, "notifications"), orderBy("createdAt", "desc"));
+            const unsubNoti = onSnapshot(q, (snap) => {
+              const list = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+              setNotifications(list);
+              setUnreadCount(list.filter((n) => !n.read).length);
+            });
+            // Guardar en closure para limpiar en logout
+            window.__notiUnsub && window.__notiUnsub();
+            window.__notiUnsub = unsubNoti;
+          } catch {}
+
+          // Crear notificación de inicio de sesión (una vez por sesión)
+          try {
+            const onceKey = `loginNotified:${currentUser.uid}`;
+            if (!sessionStorage.getItem(onceKey)) {
+              await addDoc(collection(db, "users", currentUser.uid, "notifications"), {
+                type: "login",
+                message: `Iniciaste sesión`,
+                createdAt: serverTimestamp(),
+                read: false,
+              });
+              sessionStorage.setItem(onceKey, "1");
+            }
+          } catch {}
         }
       } else {
         setUser(null); //establece el usuario como null
+        setNotifications([]);
+        setUnreadCount(0);
+        try { window.__notiUnsub && window.__notiUnsub(); window.__notiUnsub = null; } catch {}
       }
       setLoadingUser(false); //cierra el popup de login
     });
@@ -79,6 +143,33 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites)); //guarda los favoritos en localStorage
   }, [favorites]);
+
+  // Persistir carrito y favoritos en Firestore cuando el usuario está logueado
+  useEffect(() => {
+    const persist = async () => {
+      if (!user?.uid) return;
+      try {
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, { cart }, { merge: true });
+      } catch (e) {
+        try { console.warn("[Sync] Error saving cart to Firestore", e); } catch {}
+      }
+    };
+    persist();
+  }, [user?.uid, cart]);
+
+  useEffect(() => {
+    const persist = async () => {
+      if (!user?.uid) return;
+      try {
+        const userRef = doc(db, "users", user.uid);
+        await setDoc(userRef, { favorites }, { merge: true });
+      } catch (e) {
+        try { console.warn("[Sync] Error saving favorites to Firestore", e); } catch {}
+      }
+    };
+    persist();
+  }, [user?.uid, favorites]);
 
   // Funciones globales
   const addToCart = (item) => { //agrega un item al carrito
@@ -164,6 +255,19 @@ export const AppProvider = ({ children }) => {
     setUser(null); //establece el usuario como null
   };
 
+  // Marcar notificaciones como leídas
+  const markAllNotificationsRead = async () => {
+    try {
+      if (!user?.uid) return;
+      const unread = notifications.filter((n) => !n.read);
+      await Promise.all(
+        unread.map((n) => updateDoc(doc(db, 'users', user.uid, 'notifications', n.id), { read: true }))
+      );
+    } catch (e) {
+      try { console.warn('[Noti] Error al marcar notificaciones como leídas', e); } catch {}
+    }
+  };
+
   return (
     <AppContext.Provider //proveedor del contexto
       value={{ // valor del contexto
@@ -182,6 +286,9 @@ export const AppProvider = ({ children }) => {
         favorites, // favoritos
         addToFavorites, // agregar a favoritos
         removeFromFavorites, // remover de favoritos
+        notifications, // notificaciones
+        unreadCount, // no leídas
+        markAllNotificationsRead, // acción para marcarlas como leídas
       }}
     >
       {children}

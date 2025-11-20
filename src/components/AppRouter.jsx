@@ -6,6 +6,8 @@ import Carrito from "../pages/Carrito";
 import Catalogo from "../pages/Catalogo";
 import Favoritos from "../pages/Favoritos";
 import Perfil from "../pages/Perfil";
+import Pedidos from "../pages/Pedidos";
+import Notificaciones from "../pages/Notificaciones";
 import Producto from "../pages/Producto";
 import Index from "../pages/index";
 import Checkout from "../pages/Checkout";
@@ -64,6 +66,14 @@ const AppRouter = () => {
       <Route
         path="/perfil"
         element={<PrivateRoute path="/perfil" allowedRoles={["cliente","admin"]} element={<Perfil />} />}
+      />
+      <Route
+        path="/pedidos"
+        element={<PrivateRoute path="/pedidos" allowedRoles={["cliente","admin"]} element={<Pedidos />} />}
+      />
+      <Route
+        path="/notificaciones"
+        element={<PrivateRoute path="/notificaciones" allowedRoles={["cliente","admin"]} element={<Notificaciones />} />}
       />
 
       {/* Rutas de administrador */}

@@ -2,9 +2,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 function Perfil(){
-    const { user, logout } = useContext(AppContext);
+    const { user, logout, unreadCount } = useContext(AppContext);
+    const navigate = useNavigate();
     return(
         <div className="bg-AzulClaro">
             <Header></Header>
@@ -16,8 +18,15 @@ function Perfil(){
                     <div className="w-[400px] h-auto p-4 bg-Azul flex flex-col items-center justify-center">
                         <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">INFORMACIÓN DE LA CUENTA</button></div>
                         <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">METODOS DE PAGO</button></div>
-                        <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">PEDIDOS</button></div>
-                        <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">NOTIFICACIONES</button></div>
+                        <div className="w-full p-2"><button onClick={() => navigate('/pedidos')} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">PEDIDOS</button></div>
+                        <div className="w-full p-2">
+                          <div className="relative max-w-[400px] w-full group">
+                            <button onClick={() => navigate('/notificaciones')} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">NOTIFICACIONES</button>
+                            {unreadCount > 0 && (
+                              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-6 min-w-6 px-2 flex items-center justify-center border-2 border-white transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-1">{unreadCount}</span>
+                            )}
+                          </div>
+                        </div>
                         <div className="w-full p-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 max-w-[400px] font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">AYUDA</button></div>
                         <div className="w-full p-2 text-white"><button onClick={logout} className="bg-AzulCeleste border-Azul border-4 hover:bg-AzulClaro hover:border-AzulCeleste hover:border-4 max-w-[400px] font-bold hover:text-black py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">CERRAR SESIÓN</button></div>
                     </div>
@@ -52,8 +61,15 @@ function Perfil(){
                     <div className="p-4 bg-Azul">
                         <div className="w-full "><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">INFORMACIÓN DE LA CUENTA</button></div>
                         <div className="w-full mt-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">METODOS DE PAGO</button></div>
-                        <div className="w-full mt-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">PEDIDOS</button></div>
-                        <div className="w-full mt-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">NOTIFICACIONES</button></div>
+                        <div className="w-full mt-2"><button onClick={() => navigate('/pedidos')} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">PEDIDOS</button></div>
+                        <div className="w-full mt-2">
+                          <div className="relative w-full group">
+                            <button onClick={() => navigate('/notificaciones')} className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">NOTIFICACIONES</button>
+                            {unreadCount > 0 && (
+                              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-6 min-w-6 px-2 flex items-center justify-center border-2 border-white transform transition-transform duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-1">{unreadCount}</span>
+                            )}
+                          </div>
+                        </div>
                         <div className="w-full mt-2"><button className="bg-AzulClaro border-Azul border-4 hover:bg-AzulCeleste hover:border-AzulClaro hover:border-4 font-bold hover:text-white py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">AYUDA</button></div>
                         <div className="w-full p-2 text-white"><button onClick={logout} className="bg-AzulCeleste border-Azul border-4 hover:bg-AzulClaro hover:border-AzulCeleste hover:border-4 font-bold hover:text-black py-2 px-4 rounded-full w-full hover:scale-105 transition-transform duration-300 ease-in-out">CERRAR SESIÓN</button></div>
                     </div>

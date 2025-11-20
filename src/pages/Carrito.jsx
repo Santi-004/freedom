@@ -27,7 +27,9 @@ function Carrito() {
       setShowSizeModal(true);
       return;
     }
-    navigate("/checkout"); // Ruta placeholder para el formulario de compra
+    sessionStorage.setItem('checkoutAllowed', '1');
+    sessionStorage.removeItem('checkoutSingle');
+    navigate("/checkout", { state: { fromCart: true } });
   };
 
   // Totales y resumen

@@ -76,8 +76,11 @@ function Producto() {
                               disabled={!talle}
                               onClick={() => {
                                 if (!talle) return;
-                                addToCart({ id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null });
-                                navigate("/checkout");
+                                const item = { id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null, cantidad: 1 };
+                                addToCart(item);
+                                sessionStorage.setItem('checkoutSingle', JSON.stringify([item]));
+                                sessionStorage.setItem('checkoutAllowed', '1');
+                                navigate("/checkout", { state: { fromProduct: true } });
                               }}
                               className={`font-bold py-2 px-4 rounded-full w-full transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
                             >
@@ -142,7 +145,8 @@ function Producto() {
                               onClick={() => {
                                 if (!talle) return;
                                 addToCart({ id: producto?.id ?? id, nombre: producto?.nombre ?? `Producto ${id}`, precio: producto?.precio ?? 0, talle, imagen: producto?.imagenCard ?? null });
-                                navigate("/checkout");
+                                sessionStorage.setItem('checkoutAllowed', '1');
+                                navigate("/checkout", { state: { fromProduct: true } });
                               }}
                               className={`font-bold py-2 px-4 rounded-full w-full max-w-[500px] mx-auto transition ${!talle ? 'bg-gray-400 cursor-not-allowed' : 'bg-Azul hover:bg-AzulCeleste hover:scale-105'}`}
                             >
